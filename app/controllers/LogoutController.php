@@ -10,3 +10,5 @@ class LogoutController extends ControllerMain
 		$this->response->redirect('login');	
 	}
 }
+
+

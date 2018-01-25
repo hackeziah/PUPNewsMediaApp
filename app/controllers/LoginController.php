@@ -1,6 +1,9 @@
 <?php
 namespace NewsApp\Controllers;
+
 use Phalcon\Mvc\Controller;
+
+use NewsApp\Forms\LoginForm;
 
 use NewsApp\Models\User;
 
@@ -15,35 +18,59 @@ class LoginController extends Controller
 
 	public function authenticateAction()
 	{
+		
+
 		if(!$this->request->isPost()){
 			$this->response->redirect('index');
 		}
+		$loginForm = new LoginForm();
 
-		$username = $this->request->getPost('username');
-		$password = $this->request->getPost('password');
+		// $this->view->loginForm = $loginForm;
 
-		$user = User::findFirstByUsername($username);
-		if ($user){
+		if (!$loginForm->isValid($_POST)) {
+						foreach($loginForm->getMessages() as $msg) {
+							$this->flash->error($msg);
+						}
 
-				if ($this->security->checkHash($password,$user->password)){
+						//flash to specified action
+			            return $this->dispatcher->forward([
+			                "controller" => "index",
+			                "action" => "index"
+			            ]);
+			}
+		
+	       if($this->request->isPost())
+	            {
+				$username = $this->request->getPost('username');
+				$password = $this->request->getPost('password');
 
-					$auth =[
-							'id' => $user->id,
-							'access' => $user->access,
-							'username' => $user->username
-					];
+				$user = User::findFirstByUsername($username);
+				if ($user){
 
-					$this->session->set('auth', $auth);
+						if ($this->security->checkHash($password,$user->password)){
 
-					$this->response->redirect('dashboard');
+							$auth =[
+									'id' => $user->id,
+									'access' => $user->access,
+									'username' => $user->username
+							];
+
+							$this->session->set('auth', $auth);
+
+							$this->response->redirect('dashboard');
+						}
 				}
+			
+				$this->flash->error('Invalid Authentication');
+				$this->dispatcher->forward([
+						'controller' => 'index',
+						'action' => 'index'
+					]);
+				
+					
+	 
+			}
 
-		}
-		$this->flash->error('Invalid Authentication');
-		$this->dispatcher->forward([
-				'controller' => 'index',
-				'action' => 'index'
-			]);
 	}
 	
 

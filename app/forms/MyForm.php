@@ -60,7 +60,7 @@ class MyForm extends Form
 
 	public function messages()
 	{
-		foreach ($this->getMessages as $message) {
+		foreach ($this->getMessages() as $message) {
 			$this->flash->error($message);
 		}
 	}

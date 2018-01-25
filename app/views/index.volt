@@ -31,7 +31,7 @@
 			
 
 					  <!-- /.content-wrapper -->	
-
+</div>
 <!-- jQuery 3 -->
    {{ javascript_include("plugins/jquery/jquery.min.js") }}
 

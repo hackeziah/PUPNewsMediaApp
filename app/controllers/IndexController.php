@@ -1,6 +1,8 @@
 <?php
 
 namespace NewsApp\Controllers;
+use NewsApp\Forms\LoginForm;
+
 use Phalcon\Mvc\Controller;
 
 class IndexController extends Controller
@@ -18,9 +20,11 @@ class IndexController extends Controller
 	public function indexAction()
 	{
 
-	 	
+	$loginForm = new LoginForm();
+	$this->view->loginForm = $loginForm;
 
-	}
 	
+	}
+		
 	
 }

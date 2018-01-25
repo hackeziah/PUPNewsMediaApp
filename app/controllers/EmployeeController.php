@@ -44,7 +44,7 @@ class EmployeeController extends ControllerMain
 		$employee->lastname = $this->request->getPost('lastname');
 		$employee->age = $this->request->getPost('age', 'int');
 		$employee->address = $this->request->getPost('address');
-		// $employee->section_id = $this->request->getPost('section_id', 'int');
+		
 
 		//save here
 		if ($employee->save()) {

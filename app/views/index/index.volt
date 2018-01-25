@@ -33,7 +33,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            {{ text_field('username', 'class' : 'form-control','required' : 'required' )}}
+                             {{ loginForm.render('username') }}
                         </div>
                     </div>
                     <div class="input-group">
@@ -41,7 +41,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            {{ password_field('password', 'class' : 'form-control','required' : 'required' )}}
+                            {{ loginForm.render('password') }}
                         </div>
                     </div>
                     <div class="row">
@@ -49,21 +49,21 @@
                             <button class="btn btn-block bg-pink waves-effect" type="submit">LOGIN</button>
                         </div>
                     </div>
-<!--  <div class="row m-t-15 m-b- -20">
-                        <div class="col-xs-6">
-                            <a href="sign-up.html">Register Now!</a>
-                        </div>
-                        <div class="col-xs-6 align-right">
-                            <a href="forgot-password.html">Forgot Password?</a>
-                        </div>
-                    </div> -->
+                <!--  <div class="row m-t-15 m-b- -20">
+                                        <div class="col-xs-6">
+                                            <a href="sign-up.html">Register Now!</a>
+                                        </div>
+                                        <div class="col-xs-6 align-right">
+                                            <a href="forgot-password.html">Forgot Password?</a>
+                                        </div>
+                                    </div> -->
                 
                   {{ end_form() }}
 
             </div>
         </div>
     </div>
-
+{{ content() }}
     <!-- Jquery Core Js -->
     {{ javascript_include ("plugins/jquery/jquery.min.js")}}
 
