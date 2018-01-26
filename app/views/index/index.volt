@@ -28,6 +28,8 @@
             <div class="body">
                 {{form ('login/authenticate', 'method' : 'post' )}}
                     <div class="msg">Sign in to start your session</div>
+
+
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
@@ -49,21 +51,27 @@
                             <button class="btn btn-block bg-pink waves-effect" type="submit">LOGIN</button>
                         </div>
                     </div>
-                <!--  <div class="row m-t-15 m-b- -20">
-                                        <div class="col-xs-6">
-                                            <a href="sign-up.html">Register Now!</a>
-                                        </div>
-                                        <div class="col-xs-6 align-right">
-                                            <a href="forgot-password.html">Forgot Password?</a>
-                                        </div>
-                                    </div> -->
-                
-                  {{ end_form() }}
+                 <div class="row m-t-15 m-b- -20">
+                    <div class="col-xs-6">                  
+                      </div>
+                          <div class="col-xs-6 align-right">
+                             <a href="{{ url("index\registration")}}">Register Now!</a>
+                        </div>
+                    </div>
 
+                     <div class="row m-t-15 m-b- -20">
+                    <div class="col-xs-6">                  
+                      </div>
+                          <div class="col-xs-6 align-right">
+                                 <a href="{{ url("index\forgotpass")}}">Fogot Password</a>
+                            </div>
+                    </div>
+
+                     {{ content() }}
+                  {{ end_form() }}
             </div>
         </div>
     </div>
-{{ content() }}
     <!-- Jquery Core Js -->
     {{ javascript_include ("plugins/jquery/jquery.min.js")}}
 

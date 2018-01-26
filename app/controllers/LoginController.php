@@ -15,7 +15,7 @@ class LoginController extends Controller
 		$this->response->redirect('index');
 
 	}
-
+    
 	public function authenticateAction()
 	{
 		
@@ -70,6 +70,10 @@ class LoginController extends Controller
 					
 	 
 			}
+
+	}
+	
+	public function registration(){
 
 	}
 	
