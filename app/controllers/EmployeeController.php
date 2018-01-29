@@ -25,7 +25,8 @@ class EmployeeController extends ControllerMain
 			$this->response->redirect('employee');
 
 		}
-				$myForm = new MyForm();
+		
+		$myForm = new MyForm();
 		if (!$myForm->isValid($_POST)) {
 			foreach($studentForm->getMessages() as $msg) {
 				$this->flash->error($msg);
