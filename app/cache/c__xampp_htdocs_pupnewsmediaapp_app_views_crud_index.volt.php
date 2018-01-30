@@ -31,10 +31,13 @@
 						<td><?= $this->escaper->escapeHtml($data->age) ?></td>
 						<td><?= ucwords($this->escaper->escapeHtml($data->address)) ?></td>
 						<td>
-							<!-- <?= $this->tag->linkTo(['crud/detail/' . $data->id, 'Edit', 'class' => 'btn btn-success btn-sm']) ?> -->
-                          <button class="btn btn-warning" onclick="edit(<?= $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button>
-                 		 <button class="btn btn-danger" onclick="delete(<?= $data->id ?>)"><i class="glyphicon glyphicon-remove"></i></button>
+         <!-- <button class="btn btn-success" onclick="delete(<?= $data->id ?>)"><i class="glyphicon glyphicon-trash"></i> DELETE</button> -->
 
+                        <!-- <button class="btn btn-warning" onclick="edit_student(<?php echo $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button> -->
+                  <button class="btn btn-danger" onclick="detail(<?= $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger" onclick="deleteEmp(<?= $data->id ?>)"><i class="glyphicon glyphicon-remove"></i></button>
+
+			
 						</td>
 					</tr>
 					<?php } ?>
@@ -64,8 +67,34 @@
 
 <script type="text/javascript">
  	var save_method;
-    var table;
+  var table;
+    function deleteEmp(id){
 
+            if(confirm('Are you sure delete this data?'))
+            {
+                  $.ajax({
+                    url : "<?= $this->url->get('crud/deleteEmp') ?>/" + id,         
+                    type: "POST",
+                    dataType: "JSON",
+                    success: function(data)
+                    {   
+                      location.reload();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                      alert('Error deleting data');
+                   }
+                });
+            }
+
+            // if(response.success){
+            //       $('#deleteModal').modal('hide');
+            //       $('.alert-success').html('Employee Deleted successfully').fadeIn().delay(4000).fadeOut('slow');
+                  
+            //     }else{
+            //       alert('Error');
+            //     }
+        }
     function add_emp()
     {
       save_method = 'add';
@@ -74,6 +103,37 @@
     //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
     }
 
+     function detail(id)
+    {
+      save_method = 'update';
+      $('#form')[0].reset(); // reset form on modals
+
+      //Ajax Load data from ajax
+      $.ajax({
+
+        url : "<?= $this->url->get('crud/detail') ?>/" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+
+            $('[name="id"]').val(data.id);
+            $('[name="firstname"]').val(data.firstname);
+            $('[name="lastname"]').val(data.lastname);
+            $('[name="age"]').val(data.age);
+            $('[name="address"]').val(data.address);
+
+
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Book'); // Set title to Bootstrap modal title
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
+        }
+    });
+    }
     function save()
     {
       var url;
@@ -84,7 +144,7 @@
       }
       else
       {
-        url = "<?= $this->url->get('crud/edit') ?>')?>";
+          url = "<?= $this->url->get('crud/edit') ?>";
       }
 
        // ajax adding data to database
@@ -106,36 +166,10 @@
         });
     }
 
-    function delete(id)
-      {
-        if(confirm('Are you sure delete this data?'))
-        {
 
-            $.ajax({
-              url : "<?= $this->url->get('crud/delete') ?>"+id,
-              type: "POST",
-              dataType: "JSON",
-              success: function(data)
-              {
-               
-                location.reload();
-              },
-              error: function (jqXHR, textStatus, errorThrown)
-              {
-                alert('Error deleting data');
-             }
-          });
 
-      }
+    
 
-        if(response.success){
-              $('#deleteModal').modal('hide');
-              $('.alert-success').html('Employee Deleted successfully').fadeIn().delay(4000).fadeOut('slow');
-              
-            }else{
-              alert('Error');
-            }
-    }
 </script>
 
    <div class="modal fade" id="modal_form" tabindex="-1" role="dialog">
@@ -148,6 +182,8 @@
                                <form action="#" id="form" class="form-horizontal">
 					              <!-- <input type="hidden" value="" name="id"/> -->
 					              <div class="form-body">
+
+                              <input name="id" class="form-control" type="hidden">
 					               
 					                <div class="form-group">
 					                  <label class="control-label col-md-3">Firstname</label>
