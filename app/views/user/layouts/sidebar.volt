@@ -30,7 +30,7 @@
                     <li class="header">MAIN NAVIGATION</li>
                      
                      <li class="active">
-                        <a href="{{ url("user/student")}}">
+                        <a href="{{ url("user/home")}}">
                         
                             <i class="material-icons">home</i>
                             <span>Home</span>

@@ -30,7 +30,7 @@
                     <li class="header">MAIN NAVIGATION</li>
                      
                      <li class="active">
-                        <a href="<?= $this->url->get('user/student') ?>">
+                        <a href="<?= $this->url->get('user/home') ?>">
                         
                             <i class="material-icons">home</i>
                             <span>Home</span>

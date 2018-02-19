@@ -74,7 +74,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="../../index.html">ADMINBSB - MATERIAL DESIGN</a>
+                <a class="navbar-brand" href="../../index.html">PUP NEW'S MEDIA APP</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -306,7 +306,7 @@
                     <li class="header">MAIN NAVIGATION</li>
                      
                      <li class="active">
-                        <a href="<?= $this->url->get('user/student') ?>">
+                        <a href="<?= $this->url->get('user/home') ?>">
                         
                             <i class="material-icons">home</i>
                             <span>Home</span>
