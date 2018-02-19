@@ -3,34 +3,45 @@
 <html lang="en">
 <head>
 
-	<meta charset="utf-8">
+  <meta charset="utf-8">
 
-	{{ get_title() }}
-	{% include "layouts/link.volt" %}
-	<style type="text/css">
+  {{ get_title() }}
+  
+  {% include "template/link.volt" %}
+  <style type="text/css">
 
-	</style>
-</head>		
- {% if session.has('auth') %}	  	
-			    <!-- Content Header (Page header) -->
+  </style>
+</head>   
+
+
+ {% if session.has('auth') %}     
+
+          <!-- Content Header (Page header) -->
 <body class="theme-red">
-			<div class="wrapper">
-		  <!-- Content Wrapper. Contains page content -->
+      <div class="wrapper">
+      <!-- Content Wrapper. Contains page content -->
+ 
+         
+        
+{% if session.get('auth')['access']%}
+  {% include "template/admin/header.volt" %}
+  {% include "template/admin/sidebar.volt" %}
+  
+{% else %}
+    {% include "template/user/header.volt" %}
+    {% include "template/user/sidebar.volt" %}
 
-						{% include "layouts/header.volt" %}
-						{% include "layouts/sidebar.volt" %}
-
-			
+{% endif %}      
 
 <!-- jQuery 3 -->
 
 {% endif %}
-		
-					   
-					   {{ content() }}    
-			
+    
+             
+             {{ content() }}    
+      
 
-					  <!-- /.content-wrapper -->	
+            <!-- /.content-wrapper -->  
 </div>
 <!-- jQuery 3 -->
    {{ javascript_include("plugins/jquery/jquery.min.js") }}

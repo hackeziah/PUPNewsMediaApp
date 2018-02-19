@@ -1,4 +1,5 @@
 <?php
+
 namespace NewsApp\Models;
 
 use Phalcon\Mvc\Model;

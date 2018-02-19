@@ -1,143 +1,53 @@
 <?php
+
 namespace NewsApp\Controllers;
 
-use NewsApp\Forms\MyForm;
 use NewsApp\Models\Employee;
 
-
-class EmployeeController extends ControllerMain
+class EmployeeController extends ControllerBase
 {
-
 	public function indexAction()
 	{
 		$emps = Employee::find();
-		$this->view->emps = $emps;		
-	}
-	public function newAction()
-	{
-		$myForm = new MyForm();
-		$this->view->myForm = $myForm;
+		$this->view->emps = $emps;
 	}
 
 	public function createAction()
 	{
-		if(!$this->request->isPost()){
-			$this->response->redirect('employee');
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+		           return $this->response->redirect('crud');
+		           }
+		 
+					$ins = new Employee();
+		           		
+			               // $ins->firstname	= $this->request->getPost('firstname');
+			               // $ins->lastname	      = $this->request->getPost('lastname');
+			               // $ins->age 	      = $this->request->getPost('age');
+			               // $ins->address 		= $this->request->getPost('address');
 
-		}
-		
-		$myForm = new MyForm();
-		if (!$myForm->isValid($_POST)) {
-			foreach($studentForm->getMessages() as $msg) {
-				$this->flash->error($msg);
-			}
+		           	 	   $id 		= $this->request->getPost('id', 'int');
+			               $firstname = $this->request->getPost('firstname', ['trim', 'string']);
+			               $lastname	= $this->request->getPost('lastname');
+			               $age		= $this->request->getPost('age','int');
+			               $address  	= $this->request->getPost('address');
+			               $ins->id	=  $id;
+			               $ins->firstname	=  $firstname;
+			               $ins->lastname	=  $lastname;
+			               $ins->age 		=  $age;
+			               $ins->address 	=  $address;
 
-			//flash to specified action
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "new"
-            ]);
-		}
+					if ($ins->save()) {
+						
+						// $this->session->set('message', 'New record has been added!');
+			        		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+						
+					}
+					else{
+			        		echo json_encode(["status" => 'error','message' => 'Error Here']);
+					}
 
-		// if all good then save
-		$employee = new Employee();
-		$employee->firstname = $this->request->getPost('firstname', ['trim', 'string']);
-		$employee->lastname = $this->request->getPost('lastname');
-		$employee->age = $this->request->getPost('age', 'int');
-		$employee->address = $this->request->getPost('address');
-		
-
-		//save here
-		if ($employee->save()) {
-			// redirect with message
-			$this->session->set('message', 'New record has been added!');
-			$this->response->redirect('employee');
-		} else {
-			// flash error muna
-			$this->flash->error($employee->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "new"
-            ]);
-		}
-	}
-	
-	public function detailAction($id)
-	{
-		// display student detail here
-		$id = $this->filter->sanitize($id, 'int');
-		
-		$employee = Employee::findFirst($id);
-		if (!$employee) {
-			// pag walang ganun
-			$this->response->redirect('employee');
-		}
-
-		$myForm = new MyForm($employee);
-		$this->view->myForm = $myForm;
+				 return false;
 	}
 
-	public function updateAction()
-	{
-		// check if post request if not redirect
-		if (!$this->request->isPost()) {
-			$this->response->redirect('employee');
-		}
-
-		$id = $this->request->getPost('id', 'int');
-		$employee = Employee::findFirst($id);
-		if (!$employee) {
-			// pag walang ganun ma record
-			$this->response->redirect('employee');
-		}
-
-		// lets do the update
-		$employee->firstname = $this->request->getPost('firstname', ['trim', 'string']);
-		$employee->lastname = $this->request->getPost('lastname');
-		$employee->age = $this->request->getPost('age', 'int');
-		$employee->address = $this->request->getPost('address');
-	
-
-		//save here
-		if ($employee->save()) {
-			// redirect
-			$this->session->set('message', 'Student details has been updated!');
-			//$this->response->redirect('employee/detail/' . $id);
-			$this->response->redirect('employee');
-
-		} else {
-			// flash error muna
-			$this->flash->error($employee->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "detail",
-                "params" => [$id]
-            ]);
-		}
-
-	}
-	public function deleteAction($id)
-	{
-		// delete student record here
-		$id = $this->filter->sanitize($id, 'int');
-		
-		$employee = Employee::findFirst($id);
-		if (!$employee) {
-			// pag walang ganun
-			$this->response->redirect('student');
-		}
-
-		// delete here
-		if ($employee->delete()) {
-			$this->session->set('message', 'Employee record has been archived!');
-			$this->response->redirect('employee');
-		} else {
-			$this->flash->error($student->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "index"
-            ]);
-		}
-	}
 
 }

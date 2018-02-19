@@ -1,10 +1,10 @@
 <?php
+
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
-use Phalcon\Db\Adapter\Pdo\Mysql as DbReplicaAdapter;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 
@@ -24,18 +24,7 @@ $di->set('db',
         ]);
     }
 );
-//For DB ReplicaAdapter
-// $di->set('dbReplica',
-//     function () use ($config) {
-//         return new DbReplicaAdapter([
-//             'host' => $config->databaseReplica->host,
-//             'username' => $config->databaseReplica->username,
-//             'password' => $config->databaseReplica->password,
-//             'dbname' => $config->databaseReplica->dbname,
-//             'charset' => $config->databaseReplica->charset
-//         ]);
-//     }
-// );
+
 //url resolver
 $di->set('url',
     function () use ($config) {
@@ -46,6 +35,12 @@ $di->set('url',
         return $url;
     },
     true
+);
+//routers di
+$di->set('router',
+   function () {
+       return require APP_PATH . '/config/routes.php';
+   }
 );
 
 // Registering the view component

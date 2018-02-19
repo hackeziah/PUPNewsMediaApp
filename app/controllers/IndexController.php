@@ -15,7 +15,7 @@ class IndexController extends Controller
 		$this->tag->setTitle('Login');
 
 		if ($this->session->has('auth')) {
-			$this->response->redirect('dashboard');
+			$this->response->redirect('admin/index');
 		}
 	}
 

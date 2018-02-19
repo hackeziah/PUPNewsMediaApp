@@ -73,9 +73,9 @@ class LoginController extends Controller
 
 	}
 	
-	public function registration(){
+		public function registration(){
 
-	}
+		}
 	
 
 }
