@@ -3,15 +3,15 @@ namespace NewsApp\Models;
 
 use Phalcon\Mvc\Model;
 
-class Category extends Model
+class Tblcategory extends Model
 {
-	public $CategoryId;
-	public $CategoryName;
+	public $category_id;
+	public $category_name;
 
 	public function initialize()
 	{
 		// $this->setSource('tblCategory');
-		$this->getSource('category');
+		$this->getSource('tblcategory');
 		// $this->setSource('category');
 
 

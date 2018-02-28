@@ -3,13 +3,13 @@
 namespace NewsApp\Controllers\Admin;
 
 use Phalcon\Paginator\Adapter\Model as Paginator;
-use NewsApp\Models\Category;
+use NewsApp\Models\Tblcategory;
 
 class ManagecategoryController extends ControllerBase
 {
 	public function indexAction()
 	{
-		$cat = Category::find();
+		$cat = Tblcategory::find();
 		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
        	$paginator = new Paginator([
            'data' => $cat,
@@ -29,13 +29,13 @@ public function createAction()
            return $this->response->redirect('admin/managecategory');
            }
 
-	        $CategoryName = $this->request->getPost('CategoryName');
+	        $category_name = $this->request->getPost('category_name');
 	            
 
-			$ins = new Category();
+			$ins = new Tblcategory();
 
 	   
-	        $ins->CategoryName	=  $CategoryName;
+	        $ins->category_name	=  $category_name;
 	            
 
 			if ($ins->save()) {
@@ -54,15 +54,15 @@ public function createAction()
 	}
 
 	
-	public function detailAction($CategoryId)
+	public function detailAction($category_id)
 	{
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
            return $this->response->redirect('admin/managecategory');
            }
 
-		$CategoryId = $this->filter->sanitize($CategoryId, 'int');
+		$category_id = $this->filter->sanitize($category_id, 'int');
 		
-		$cat = Category::findFirst($CategoryId);
+		$cat = Tblcategory::findFirst($category_id);
 		echo json_encode($cat);
 
 		if (!$cat) {
@@ -81,23 +81,23 @@ public function createAction()
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
            return $this->response->redirect('admin/managecategory');
            }
-				// $CategoryId = $this->filter->sanitize('CategoryId', 'int');
-           	  	$CategoryId = $this->request->getPost('CategoryId', 'int');
+				// $category_id = $this->filter->sanitize('category_id', 'int');
+           	  	$category_id = $this->request->getPost('category_id', 'int');
 				
 		
-				$ins = Category::findFirst($CategoryId);
+				$ins = Tblcategory::findFirst($category_id);
 
 				 if (!$ins) {
 						// pag walang ganun ma record
 					$this->response->redirect('admin/managecategory');
 					}
 
-	        	// $CategoryName = $this->request->getPost('CategoryName');
+	        	// $category_name = $this->request->getPost('category_name');
 	   			
 	      
 
 	   
-	      		$ins->CategoryName	= $this->request->getPost('CategoryName');
+	      		$ins->category_name	= $this->request->getPost('category_name');
 	   			
 				if ($ins->save()) {
 					
@@ -113,16 +113,16 @@ public function createAction()
 				 return false;
 	}
 
-	public function deleteCatAction($CategoryId)
+	public function deleteCatAction($category_id)
 	{
 		
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
 		           return $this->response->redirect('admin/managecategory');
 		           }
 
-				$CategoryId = $this->filter->sanitize($CategoryId, 'int');
+				$category_id = $this->filter->sanitize($category_id, 'int');
 				
-				$cat = Category::findFirst($CategoryId);
+				$cat = Tblcategory::findFirst($category_id);
 				// echo json_encode($cat);
 
 				if (!$cat) {

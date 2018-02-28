@@ -8,7 +8,7 @@ return new Config([
         'host' => 'localhost',
         'username' => 'root',
         'password' => '',
-        'dbname' => 'sample',
+        'dbname' => 'dbpupnewsmediaapp',
         'charset' => 'utf8'
     ],
     'application' => [
