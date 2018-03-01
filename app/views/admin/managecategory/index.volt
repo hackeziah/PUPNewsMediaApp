@@ -22,15 +22,15 @@
 					</tr>
 				{% for data in cat.items %}
 					<tr>
-						<td>{{ data.CategoryId }}</td>
-						<td>{{ data.CategoryName|e|capitalize }}</td>
+						<td>{{ data.category_id }}</td>
+						<td>{{ data.category_name|e|capitalize }}</td>
 					
 						<td>
          <!-- <button class="btn btn-success" onclick="delete({{ data.id }})"><i class="glyphicon glyphicon-trash"></i> DELETE</button> -->
 
                         <!-- <button class="btn btn-warning" onclick="edit_student(<?php echo $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button> -->
-                  <button class="btn btn-danger" onclick="detail({{ data.CategoryId }})"><i class="glyphicon glyphicon-pencil"></i></button>
-                  <button class="btn btn-danger" onclick="deleteCat({{ data.CategoryId }})"><i class="glyphicon glyphicon-remove"></i></button>
+                  <button class="btn btn-danger" onclick="detail({{ data.category_id }})"><i class="glyphicon glyphicon-pencil"></i></button>
+                  <button class="btn btn-danger" onclick="deleteCat({{ data.category_id }})"><i class="glyphicon glyphicon-remove"></i></button>
 
 			
 						</td>
@@ -72,7 +72,7 @@
 
 
 
-     function detail(CategoryId)
+     function detail(category_id)
     {
       save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
@@ -80,14 +80,14 @@
       //Ajax Load data from ajax
       $.ajax({
 
-        url : "{{ url('admin/managecategory/detail') }}/" + CategoryId,
+        url : "{{ url('admin/managecategory/detail') }}/" + category_id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
         {
 
-            $('[name="CategoryId"]').val(data.CategoryId);
-            $('[name="CategoryName"]').val(data.CategoryName);
+            $('[name="category_id"]').val(data.category_id);
+            $('[name="category_name"]').val(data.category_name);
           
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
@@ -134,12 +134,12 @@
     }
 
 
-    function deleteCat(CategoryId){
+    function deleteCat(category_id){
 
             if(confirm('Are you sure delete this data?'))
             {
                   $.ajax({
-                    url : "{{ url('admin/managecategory/deleteCat') }}/" + CategoryId,         
+                    url : "{{ url('admin/managecategory/deleteCat') }}/" + category_id,         
                     type: "POST",
                     dataType: "JSON",
                     success: function(data)
@@ -171,12 +171,12 @@
 					              <!-- <input type="hidden" value="" name="id"/> -->
 					              <div class="form-body">
 
-                              <input name="CategoryId" class="form-control" type="hidden">
+                              <input name="category_id" class="form-control" type="hidden">
 					               
 					                <div class="form-group">
 					                  <label class="control-label col-md-3">Category Name</label>
 					                  <div class="col-md-9">
-					                    <input name="CategoryName" placeholder="Category Name" class="form-control" type="text">
+					                    <input name="category_name" placeholder="Category Name" class="form-control" type="text">
 					                  </div>
 					                </div>
 					              

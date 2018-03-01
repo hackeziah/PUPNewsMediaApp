@@ -11,7 +11,7 @@
 
   </style>
 </head>   
- {% if session.has('auth') %}     
+  
           <!-- Content Header (Page header) -->
 <body class="theme-red">
       <div class="wrapper">
@@ -20,11 +20,11 @@
             {% include "layouts/header.volt" %}
             {% include "layouts/sidebar.volt" %}
 
+    
       
 
 <!-- jQuery 3 -->
 
-{% endif %}
     
              <!--  -->
       

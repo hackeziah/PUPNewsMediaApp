@@ -55,9 +55,14 @@ class LoginController extends Controller
 									'username' => $user->username
 							];
 
-							$this->session->set('auth', $auth);
+							//changed added condition
+							if ($user->access == 'admin'){
+							$this->session->set('authAdmin', $auth);
+							}else{
+								$this->session->set('authUser', $auth);
+							}
 
-							$this->response->redirect('dashboard');
+							// $this->response->redirect('dashboard');
 						}
 				}
 			

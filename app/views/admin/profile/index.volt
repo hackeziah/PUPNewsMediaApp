@@ -84,7 +84,7 @@
                                                                                   <i class="material-icons">group</i>Followers</a>
                                                                              </div>
                                                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                                                                
+                                                                                    
                                                                                   <i class="material-icons">group</i>Following</a>
                                                                            </div>
                                                                         </div>
