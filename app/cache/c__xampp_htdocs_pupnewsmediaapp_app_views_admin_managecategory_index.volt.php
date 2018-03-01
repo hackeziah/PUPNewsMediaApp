@@ -22,6 +22,11 @@
 					</tr>
 				<?php foreach ($cat->items as $data) { ?>
 					<tr>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 52cd25052f8b95f9d76b98aefc38676d8fc7beae
 						<td><?= $data->category_id ?></td>
 						<td><?= ucwords($this->escaper->escapeHtml($data->category_name)) ?></td>
 					

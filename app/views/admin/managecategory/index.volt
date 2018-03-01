@@ -22,6 +22,11 @@
 					</tr>
 				{% for data in cat.items %}
 					<tr>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 52cd25052f8b95f9d76b98aefc38676d8fc7beae
 						<td>{{ data.category_id }}</td>
 						<td>{{ data.category_name|e|capitalize }}</td>
 					
