@@ -14,7 +14,7 @@
 </head>   
 
 
- {% if session.has('auth') %}     
+ <!-- {% if session.has('auth') %}      -->
 
           <!-- Content Header (Page header) -->
 <body class="theme-red">
@@ -23,7 +23,7 @@
  
          
         
-{% if session.get('auth')['access']%}
+<!-- {% if session.get('auth')['access']%}
   {% include "template/admin/header.volt" %}
   {% include "template/admin/sidebar.volt" %}
   
@@ -31,12 +31,12 @@
     {% include "template/user/header.volt" %}
     {% include "template/user/sidebar.volt" %}
 
-{% endif %}      
+{% endif %}   -->    
 
 <!-- jQuery 3 -->
 
-{% endif %}
-    
+<!-- {% endif %}
+     -->
              
              {{ content() }}    
       

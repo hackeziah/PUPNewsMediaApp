@@ -36,7 +36,7 @@
                             <span>Home</span>
                         </a>
                     </li>
-
+<!-- 
                
                      <li class="active">
                         <a href="<?= $this->url->get('user/student') ?>">
@@ -68,7 +68,7 @@
                             <i class="material-icons">contacts</i>
                             <span>Contacts</span>
                         </a>
-                    </li>
+                    </li> -->
                   
 
 

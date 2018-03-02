@@ -36,7 +36,7 @@
 </head>   
 
 
- <?php if ($this->session->has('auth')) { ?>     
+ <!-- <?php if ($this->session->has('auth')) { ?>      -->
 
           <!-- Content Header (Page header) -->
 <body class="theme-red">
@@ -45,7 +45,7 @@
  
          
         
-<?php if ($this->session->get('auth')['access']) { ?>
+<!-- <?php if ($this->session->get('auth')['access']) { ?>
       <div class="page-loader-wrapper">
         <div class="loader">
             <div class="preloader">
@@ -1574,12 +1574,12 @@
         <!-- #END# Right Sidebar -->
     </section>
 
-<?php } ?>      
+<?php } ?>   -->    
 
 <!-- jQuery 3 -->
 
-<?php } ?>
-    
+<!-- <?php } ?>
+     -->
              
              <?= $this->getContent() ?>    
       

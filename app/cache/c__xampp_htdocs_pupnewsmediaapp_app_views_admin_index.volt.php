@@ -32,7 +32,7 @@
 
   </style>
 </head>   
- <?php if ($this->session->has('auth')) { ?>     
+ <!-- <?php if ($this->session->has('auth')) { ?>      -->
           <!-- Content Header (Page header) -->
 <body class="theme-red">
       <div class="wrapper">
@@ -706,7 +706,8 @@
 
 <!-- jQuery 3 -->
 
-<?php } ?>
+<!-- <?php } ?> -->
+
     
              <!--  -->
       
