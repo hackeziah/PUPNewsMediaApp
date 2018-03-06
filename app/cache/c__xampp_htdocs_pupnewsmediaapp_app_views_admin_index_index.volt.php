@@ -28,8 +28,7 @@
     <?= $this->tag->stylesheetLink('css/style.css') ?>
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
      <?= $this->tag->stylesheetLink('css/themes/all-themes.css') ?>
-    <!-- Jquery Core Js -->
-
+ <?= $this->tag->stylesheetLink('plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css') ?>
   <style type="text/css">
 
   </style>
@@ -294,10 +293,8 @@
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="<?= $this->url->get('admin/profile') ?>"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">group</i>Followers</a></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
                             <li role="seperator" class="divider"></li>
                             <li><a href="<?= $this->url->get('logout') ?>"><i class="material-icons">input</i>Sign Out</a></li>
@@ -312,15 +309,72 @@
                 <ul class="list">
                     <li class="header">MAIN NAVIGATION</li>
                      
-                     <li class="active">
+                     <li class="">
                         <a href="<?= $this->url->get('admin/dashboard') ?>">
                         
                             <i class="material-icons">home</i>
                             <span>Home</span>
                         </a>
                     </li>
+
+                     <li class="active">
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">view_list</i>
+                            <span>MANAGE</span>
+                        </a>
+                        <ul class="ml-menu">
+                     
+                            <li>
+                                <a href="<?= $this->url->get('admin/ManageUsers') ?>">Manage Users</a>
+                            </li>
+                                   <li>
+                                <a href="<?= $this->url->get('admin/ManageMagazine') ?>">Manage Magazine</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->url->get('admin/ManageNews') ?>">Manage News</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->url->get('admin/ManageCategory') ?>">Manage Category</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                     <li class="">
+                        <a href="<?= $this->url->get('admin/dashboard') ?>">
+                        
+                            <i class="material-icons">home</i>
+                            <span>Magazine</span>
+                        </a>
+                    </li>
+
+                     <li class="">
+                        <a href="<?= $this->url->get('admin/dashboard') ?>">
+                        
+                            <i class="material-icons">home</i>
+                            <span>About Me</span>
+                        </a>
+                    </li>
+
+                     <li class="">
+                        <a href="<?= $this->url->get('admin/dashboard') ?>">
+                        
+                            <i class="material-icons">home</i>
+                            <span>Goals</span>
+                        </a>
+                    </li>
+
+                     <li class="">
+                        <a href="<?= $this->url->get('admin/dashboard') ?>">
+                        
+                            <i class="material-icons">home</i>
+                            <span>Contacts</span>
+                        </a>
+                    </li>
+                  
+
+
 <!-- 
-                    <li class="active">
+                    <li class="">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Forms</span>
@@ -481,24 +535,7 @@
                         </ul>
                     </li> -->
 
-               <!--      <li>
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">view_list</i>
-                            <span>Tables</span>
-                        </a>
-                        <ul class="ml-menu">
-                            <li>
-                                <a href="../../pages/tables/normal-tables.html">Normal Tables</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/tables/jquery-datatable.html">Jquery Datatables</a>
-                            </li>
-                            <li>
-                                <a href="../../pages/tables/editable-table.html">Editable Tables</a>
-                            </li>
-                        </ul>
-                    </li>
-                 -->  
+          
                 </ul>
             </div>
             <!-- #Menu -->
@@ -663,6 +700,11 @@
         </aside>
         <!-- #END# Right Sidebar -->
     </section>
+
+
+
+
+
 
 
 

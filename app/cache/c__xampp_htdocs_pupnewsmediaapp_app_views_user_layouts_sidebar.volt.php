@@ -36,6 +36,46 @@
                             <span>Home</span>
                         </a>
                     </li>
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/mynews') ?>">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My News</span>
+                        </a>
+                    </li>
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/mymagazines') ?>">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My Magazines</span>
+                        </a>
+                    </li>
+
+
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/announcements') ?>">
+                        
+                            <i class="material-icons">announcement</i>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/events') ?>">
+                        
+                            <i class="material-icons">event_note</i>
+                            <span>Events Calendar</span>
+                        </a>
+                    </li>
+
+
+
+
+
 <!-- 
                
                      <li class="active">
@@ -240,16 +280,16 @@
             <!-- #Menu -->
             <!-- Footer -->
           
-            <div class="legal">
-                <div class="copyright">
-                    &copy; <a href="javascript:void(0);">PUP - News & Media App</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0
-                </div>
-            </div>
-            <!-- #Footer -->
-            
+<div class="legal">
+	<div class="copyright">
+		&copy; <a href="javascript:void(0);">PUP - News & Media App</a>.
+	</div>
+	<div class="version">
+		<b>Version: </b> 1.0
+	</div>
+</div>
+<!-- #Footer -->
+
             <!-- Footer -->
 
         </aside>

@@ -1,100 +1,159 @@
 {{content()}}
-    <section>
-        <!-- Left Sidebar -->
-        <aside id="leftsidebar" class="sidebar">
-            <!-- User Info -->
-            <div class="user-info">
-                <div class="image">
-                    <img src="../../images/user.png" width="48" height="48" alt="User" />
-                </div>
-                <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
-                    <div class="btn-group user-helper-dropdown">
-                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ url("admin/profile")}}"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="{{ url("logout")}}"><i class="material-icons">input</i>Sign Out</a></li>
-                            
-                        </ul>
-                    </div>
+<section>
+    <!-- Left Sidebar -->
+    <aside id="leftsidebar" class="sidebar">
+        <!-- User Info -->
+        <div class="user-info">
+            <div class="image">
+                <img src="../../images/user.png" width="48" height="48" alt="User" />
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                <div class="email">john.doe@example.com</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="{{ url("admin/profile")}}"><i class="material-icons">person</i>Profile</a></li>
+                        <li role="seperator" class="divider"></li>
+                        <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
+                        <li role="seperator" class="divider"></li>
+                        <li><a href="{{ url("logout")}}"><i class="material-icons">input</i>Sign Out</a></li>
+
+                    </ul>
                 </div>
             </div>
-            <!-- #User Info -->
-            <!-- Menu -->
-            <div class="menu">
-                <ul class="list">
-                    <li class="header">MAIN NAVIGATION</li>
-                     
-                     <li class="">
-                        <a href="{{ url("admin/dashboard")}}">
-                        
-                            <i class="material-icons">home</i>
-                            <span>Home</span>
-                        </a>
-                    </li>
+        </div>
+        <!-- #admin Info -->
+        <!-- Menu -->
+        <div class="menu">
+            <ul class="list">
+                <li class="header">MAIN NAVIGATION</li>
 
+
+
+                <li class="active">
+                    <a href="{{ url("admin/home")}}">
+
+                        <i class="material-icons">home</i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{ url("admin/dashboard")}}">
+
+                        <i class="material-icons">dashboard</i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="javascript:void(0);" class="menu-toggle">
+                        <i class="material-icons">view_list</i>
+                        <span>MANAGE</span>
+                    </a>
+                    <ul class="ml-menu">
+
+                        <li>
+                            <a href="{{ url("admin/ManageUsers")}}">Manage Users</a>
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/ManageMagazine")}}">Manage Magazine</a>
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/ManageNews")}}">Manage News</a>
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/ManageCategory")}}">Manage Category</a>
+
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/ManageAnnouncements")}}">Manage Announcements</a>
+                            
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/ManageEvents")}}">Manage Events</a>
+                            
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="active">
+                    <a href="{{ url("admin/MyNews")}}">
+
+                        <i class="material-icons">assignment</i>
+                        <span>My News</span>
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="{{ url("admin/MyMagazines")}}">
+
+                        <i class="material-icons">assignment</i>
+                        <span>My Magazines</span>
+                    </a>
+                </li>
+
+
+
+                <li class="active">
+                    <a href="{{ url("admin/announcements")}}">
+
+                        <i class="material-icons">announcement</i>
+                        <span>Announcements</span>
+                    </a>
+                </li>
+
+
+                <li class="active">
+                    <a href="{{ url("admin/events")}}">
+
+                        <i class="material-icons">event_note</i>
+                        <span>Events Calendar</span>
+                    </a>
+                </li>
+
+
+
+
+
+<!-- 
+               
                      <li class="active">
-                        <a href="javascript:void(0);" class="menu-toggle">
-                            <i class="material-icons">view_list</i>
-                            <span>MANAGE</span>
-                        </a>
-                        <ul class="ml-menu">
-                     
-                            <li>
-                                <a href="{{ url("admin/ManageUsers")}}">Manage Users</a>
-                            </li>
-                                   <li>
-                                <a href="{{ url("admin/ManageMagazine")}}">Manage Magazine</a>
-                            </li>
-                            <li>
-                                <a href="{{ url("admin/ManageNews")}}">Manage News</a>
-                            </li>
-                            <li>
-                                <a href="{{ url("admin/ManageCategory")}}">Manage Category</a>
-                            </li>
-                        </ul>
-                    </li>
-
-                     <li class="">
-                        <a href="{{ url("admin/dashboard")}}">
+                        <a href="{{ url("admin/student")}}">
                         
-                            <i class="material-icons">home</i>
+                            <i class="material-icons">line_weight</i>
                             <span>Magazine</span>
                         </a>
                     </li>
 
-                     <li class="">
-                        <a href="{{ url("admin/dashboard")}}">
+                     <li class="active">
+                        <a href="{{ url("user/student")}}">
                         
-                            <i class="material-icons">home</i>
+                            <i class="material-icons">accessibility</i>
                             <span>About Me</span>
                         </a>
                     </li>
 
-                     <li class="">
-                        <a href="{{ url("admin/dashboard")}}">
+                     <li class="active">
+                        <a href="{{ url("user/student")}}">
                         
-                            <i class="material-icons">home</i>
+                            <i class="material-icons">directions_run</i>
                             <span>Goals</span>
                         </a>
                     </li>
 
-                     <li class="">
-                        <a href="{{ url("admin/dashboard")}}">
+                     <li class="active">
+                        <a href="{{ url("user/student")}}">
                         
-                            <i class="material-icons">home</i>
+                            <i class="material-icons">contacts</i>
                             <span>Contacts</span>
                         </a>
-                    </li>
-                  
+                    </li> -->
+
 
 
 <!-- 
-                    <li class="">
+                    <li class="active">
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">assignment</i>
                             <span>Forms</span>
@@ -255,12 +314,12 @@
                         </ul>
                     </li> -->
 
-          
+
                 </ul>
             </div>
             <!-- #Menu -->
             <!-- Footer -->
-          {% include "layouts/footer.volt" %}
+            {% include "layouts/footer.volt" %}
             <!-- Footer -->
 
         </aside>
@@ -355,7 +414,7 @@
                             <span>Black</span>
                         </li>
                     </ul> -->
-                <!-- </div> -->
+                    <!-- </div> -->
 
 <!--                 <div role="tabpanel" class="tab-pane fade" id="settings">
                     <div class="demo-settings">
@@ -406,11 +465,11 @@
                         </ul>
                     </div>
                 </div>
-                 -->
-            </div>
-        </aside>
-        <!-- #END# Right Sidebar -->
-    </section>
+            -->
+        </div>
+    </aside>
+    <!-- #END# Right Sidebar -->
+</section>
 
 
 

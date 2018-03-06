@@ -32,3 +32,6 @@ class Tblprofile extends Model
 
 	}
 }
+
+
+

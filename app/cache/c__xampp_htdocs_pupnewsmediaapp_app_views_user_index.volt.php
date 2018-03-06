@@ -32,7 +32,7 @@
 
   </style>
 </head>   
- <?php if ($this->session->has('auth')) { ?>     
+  
           <!-- Content Header (Page header) -->
 <body class="theme-red">
       <div class="wrapper">
@@ -74,7 +74,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="../../index.html">PUP NEW'S MEDIA APP</a>
+                <a class="navbar-brand" href="../../index.html">PUP NEWS MEDIA APP</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -312,6 +312,46 @@
                             <span>Home</span>
                         </a>
                     </li>
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/mynews') ?>">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My News</span>
+                        </a>
+                    </li>
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/mymagazines') ?>">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My Magazines</span>
+                        </a>
+                    </li>
+
+
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/announcements') ?>">
+                        
+                            <i class="material-icons">announcement</i>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+
+
+                     <li class="active">
+                        <a href="<?= $this->url->get('user/events') ?>">
+                        
+                            <i class="material-icons">event_note</i>
+                            <span>Events Calendar</span>
+                        </a>
+                    </li>
+
+
+
+
+
 <!-- 
                
                      <li class="active">
@@ -516,16 +556,16 @@
             <!-- #Menu -->
             <!-- Footer -->
           
-            <div class="legal">
-                <div class="copyright">
-                    &copy; <a href="javascript:void(0);">PUP - News & Media App</a>.
-                </div>
-                <div class="version">
-                    <b>Version: </b> 1.0
-                </div>
-            </div>
-            <!-- #Footer -->
-            
+<div class="legal">
+	<div class="copyright">
+		&copy; <a href="javascript:void(0);">PUP - News & Media App</a>.
+	</div>
+	<div class="version">
+		<b>Version: </b> 1.0
+	</div>
+</div>
+<!-- #Footer -->
+
             <!-- Footer -->
 
         </aside>
@@ -682,11 +722,11 @@
 
 
 
+    
       
 
 <!-- jQuery 3 -->
 
-<?php } ?>
     
              <!--  -->
       

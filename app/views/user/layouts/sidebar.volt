@@ -36,6 +36,46 @@
                             <span>Home</span>
                         </a>
                     </li>
+
+                     <li class="active">
+                        <a href="{{ url("user/mynews")}}">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My News</span>
+                        </a>
+                    </li>
+
+                     <li class="active">
+                        <a href="{{ url("user/mymagazines")}}">
+                        
+                            <i class="material-icons">assignment</i>
+                            <span>My Magazines</span>
+                        </a>
+                    </li>
+
+
+
+                     <li class="active">
+                        <a href="{{ url("user/announcements")}}">
+                        
+                            <i class="material-icons">announcement</i>
+                            <span>Announcements</span>
+                        </a>
+                    </li>
+
+
+                     <li class="active">
+                        <a href="{{ url("user/events")}}">
+                        
+                            <i class="material-icons">event_note</i>
+                            <span>Events Calendar</span>
+                        </a>
+                    </li>
+
+
+
+
+
 <!-- 
                
                      <li class="active">

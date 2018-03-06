@@ -11,7 +11,7 @@
 
   </style>
 </head>   
- <!-- {% if session.has('auth') %}      -->
+
           <!-- Content Header (Page header) -->
 <body class="theme-red">
       <div class="wrapper">
@@ -24,12 +24,11 @@
 
 <!-- jQuery 3 -->
 
-<!-- {% endif %} -->
+
 
     
              <!--  -->
-      
-
+    
             <!-- /.content-wrapper -->  
 </div>
 <!-- jQuery 3 -->
