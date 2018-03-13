@@ -96,7 +96,7 @@
 
 
                 <li class="active">
-                    <a href="<?= $this->url->get('admin/announcements') ?>">
+                    <a href="<?= $this->url->get('admin/ManageAnnouncements/announcements') ?>">
 
                         <i class="material-icons">announcement</i>
                         <span>Announcements</span>

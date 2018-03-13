@@ -16,7 +16,7 @@ class Tblmagazinenews extends Model
 		$this->getSource('tblmagazinenews');
 
 		// map the relationship to category model
-        $this->belongsTo('magazine_id', __NAMESPACE__ .'Tblmagazine', 'magazine_id', 
+        $this->belongsTo('magazine_id', __NAMESPACE__ .'\Tblmagazine', 'magazine_id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'magazine']
         );
 		// map the relationship to profile model

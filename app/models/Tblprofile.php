@@ -20,17 +20,19 @@ class Tblprofile extends Model
 	public function initialize()
 	{
 		// $this->setSource('tblCategory');
-		$this->getSource('tblprofile');
+		$this->setSource('tblprofile');
 		// $this->setSource('category');
 
 		// map the relationship to profile model
 
-         $this->belongsTo('user_id', __NAMESPACE__ .'user', 'id', 
-            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'users']
+         $this->belongsTo('user_id', __NAMESPACE__ .'\User', 'user_id', 
+            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'user']
         );
 
 
 	}
+
+
 }
 
 

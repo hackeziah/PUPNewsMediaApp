@@ -56,7 +56,7 @@
 
 
                      <li class="active">
-                        <a href="<?= $this->url->get('user/announcements') ?>">
+                        <a href="<?= $this->url->get('user/announcements/announcements') ?>">
                         
                             <i class="material-icons">announcement</i>
                             <span>Announcements</span>

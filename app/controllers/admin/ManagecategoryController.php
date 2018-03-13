@@ -11,45 +11,45 @@ class ManagecategoryController extends ControllerBase
 	{
 		$cat = Tblcategory::find();
 		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
-       	$paginator = new Paginator([
-           'data' => $cat,
-           'limit' => 3,
-           'page' => $currentPage
-       ]);
-   	
-       $this->view->cat = $paginator->getPaginate();	
-        	
-    
+		$paginator = new Paginator([
+			'data' => $cat,
+			'limit' => 3,
+			'page' => $currentPage
+		]);
+		
+		$this->view->cat = $paginator->getPaginate();	
+		
+		
 	}
 
-public function createAction()
+	public function createAction()
 	{
 		
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('admin/managecategory');
-           }
+			return $this->response->redirect('admin/managecategory');
+		}
 
-	        $category_name = $this->request->getPost('category_name');
-	            
+		$category_name = $this->request->getPost('category_name');
+		
 
-			$ins = new Tblcategory();
+		$ins = new Tblcategory();
 
-	   
-	        $ins->category_name	=  $category_name;
-	            
+		
+		$ins->category_name	=  $category_name;
+		
 
-			if ($ins->save()) {
-				
+		if ($ins->save()) {
+			
 				// $this->session->set('message', 'New record has been added!');
-	        		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-				
-				}
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		}
 
-			else{
-	        		echo json_encode(["status" => 'error','message' => 'Error Here']);
-				}
+		else{
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
 
-		 return false;
+		return false;
 
 	}
 
@@ -57,8 +57,8 @@ public function createAction()
 	public function detailAction($category_id)
 	{
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('admin/managecategory');
-           }
+			return $this->response->redirect('admin/managecategory');
+		}
 
 		$category_id = $this->filter->sanitize($category_id, 'int');
 		
@@ -70,7 +70,7 @@ public function createAction()
 			$this->response->redirect('admin/managecategory');
 		}
 
-	   	return false;
+		return false;
 
 
 	}
@@ -79,64 +79,64 @@ public function createAction()
 	{
 		// check if post request if not redire
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('admin/managecategory');
-           }
+			return $this->response->redirect('admin/managecategory');
+		}
 				// $category_id = $this->filter->sanitize('category_id', 'int');
-           	  	$category_id = $this->request->getPost('category_id', 'int');
-				
+		$category_id = $this->request->getPost('category_id', 'int');
 		
-				$ins = Tblcategory::findFirst($category_id);
+		
+		$ins = Tblcategory::findFirst($category_id);
 
-				 if (!$ins) {
+		if (!$ins) {
 						// pag walang ganun ma record
-					$this->response->redirect('admin/managecategory');
-					}
+			$this->response->redirect('admin/managecategory');
+		}
 
 	        	// $category_name = $this->request->getPost('category_name');
-	   			
-	      
+		
+		
 
-	   
-	      		$ins->category_name	= $this->request->getPost('category_name');
-	   			
-				if ($ins->save()) {
-					
-					
-		        		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-					
-					}
+		
+		$ins->category_name	= $this->request->getPost('category_name');
+		
+		if ($ins->save()) {
+			
+			
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		}
 
-				else {
-		        		echo json_encode(["status" => 'error','message' => 'Error Here']);
-					}
+		else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
 
-				 return false;
+		return false;
 	}
 
 	public function deleteCatAction($category_id)
 	{
 		
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-		           return $this->response->redirect('admin/managecategory');
-		           }
+			return $this->response->redirect('admin/managecategory');
+		}
 
-				$category_id = $this->filter->sanitize($category_id, 'int');
-				
-				$cat = Tblcategory::findFirst($category_id);
+		$category_id = $this->filter->sanitize($category_id, 'int');
+		
+		$cat = Tblcategory::findFirst($category_id);
 				// echo json_encode($cat);
 
-				if (!$cat) {
+		if (!$cat) {
 					// pag walang ganun
-					$this->response->redirect('admin/managecategory');
-				}
-			if ($cat->delete()) {
-						echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-					
-				} else {
-			        	echo json_encode(["status" => 'error','message' => 'Error Here']);
-					
-				}
-			   	return false;
+			$this->response->redirect('admin/managecategory');
+		}
+		if ($cat->delete()) {
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		} else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+			
+		}
+		return false;
 
 	}
 

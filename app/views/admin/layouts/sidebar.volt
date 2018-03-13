@@ -96,7 +96,7 @@
 
 
                 <li class="active">
-                    <a href="{{ url("admin/announcements")}}">
+                    <a href="{{ url("admin/ManageAnnouncements/announcements")}}">
 
                         <i class="material-icons">announcement</i>
                         <span>Announcements</span>

@@ -56,7 +56,7 @@
 
 
                      <li class="active">
-                        <a href="{{ url("user/announcements")}}">
+                        <a href="{{ url("user/announcements/announcements")}}">
                         
                             <i class="material-icons">announcement</i>
                             <span>Announcements</span>

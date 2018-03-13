@@ -15,15 +15,15 @@ class CrudController extends ControllerMain
 		
 		$emps = Employee::find();
 		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
-       	$paginator = new Paginator([
-           'data' => $emps,
-           'limit' => 3,
-           'page' => $currentPage
-       ]);
+		$paginator = new Paginator([
+			'data' => $emps,
+			'limit' => 3,
+			'page' => $currentPage
+		]);
    	// $this->view->disable();
-       $this->view->emps = $paginator->getPaginate();	
+		$this->view->emps = $paginator->getPaginate();	
         // $this->view->emps = $emps;		
-    
+		
 		
 	}
 
@@ -31,34 +31,34 @@ class CrudController extends ControllerMain
 	{
 		
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('crud');
-           }
+			return $this->response->redirect('crud');
+		}
 
-	             $firstname = $this->request->getPost('firstname');
-	             $lastname	= $this->request->getPost('lastname');
-	             $age		= $this->request->getPost('age');
-	             $address  	= $this->request->getPost('address');
+		$firstname = $this->request->getPost('firstname');
+		$lastname	= $this->request->getPost('lastname');
+		$age		= $this->request->getPost('age');
+		$address  	= $this->request->getPost('address');
 
-			$ins = new Employee();
+		$ins = new Employee();
 
-	   
-	               $ins->firstname	=  $firstname;
-	               $ins->lastname	=  $lastname;
-	               $ins->age 		=  $age;
-	               $ins->address 	=  $address;
+		
+		$ins->firstname	=  $firstname;
+		$ins->lastname	=  $lastname;
+		$ins->age 		=  $age;
+		$ins->address 	=  $address;
 
-			if ($ins->save()) {
-				
+		if ($ins->save()) {
+			
 				// $this->session->set('message', 'New record has been added!');
-	        		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-				
-				}
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		}
 
-			else{
-	        		echo json_encode(["status" => 'error','message' => 'Error Here']);
-				}
+		else{
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
 
-		 return false;
+		return false;
 
 	}
 
@@ -66,8 +66,8 @@ class CrudController extends ControllerMain
 	public function detailAction($id)
 	{
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('crud');
-           }
+			return $this->response->redirect('crud');
+		}
 
 		$id = $this->filter->sanitize($id, 'int');
 		
@@ -79,7 +79,7 @@ class CrudController extends ControllerMain
 			$this->response->redirect('crud');
 		}
 
-	   	return false;
+		return false;
 
 
 	}
@@ -88,68 +88,68 @@ class CrudController extends ControllerMain
 	{
 		// check if post request if not redire
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
-           return $this->response->redirect('crud');
-           }
-           	  	$id = $this->request->getPost('id', 'int');
+			return $this->response->redirect('crud');
+		}
+		$id = $this->request->getPost('id', 'int');
 
-				 $ins = Employee::findFirst($id);
+		$ins = Employee::findFirst($id);
 
-				 if (!$ins) {
+		if (!$ins) {
 						// pag walang ganun ma record
-					$this->response->redirect('crud');
-					}
+			$this->response->redirect('crud');
+		}
 
-	   
-	             $firstname = $this->request->getPost('firstname', ['trim', 'string']);
-	             $lastname	= $this->request->getPost('lastname');
-	             $age		= $this->request->getPost('age','int');
-	             $address  	= $this->request->getPost('address');
+		
+		$firstname = $this->request->getPost('firstname', ['trim', 'string']);
+		$lastname	= $this->request->getPost('lastname');
+		$age		= $this->request->getPost('age','int');
+		$address  	= $this->request->getPost('address');
 
 	               // $ins->id	=  $id;
-	               $ins->firstname	=  $firstname;
-	               $ins->lastname	=  $lastname;
-	               $ins->age 		=  $age;
-	               $ins->address 	=  $address;
-	                
+		$ins->firstname	=  $firstname;
+		$ins->lastname	=  $lastname;
+		$ins->age 		=  $age;
+		$ins->address 	=  $address;
+		
 
-				if ($ins->save()) {
-					
+		if ($ins->save()) {
+			
 					// $this->session->set('message', 'New record has been added!');
-		        		
-		        		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-					
-					}
+			
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		}
 
-				else {
-		        		echo json_encode(["status" => 'error','message' => 'Error Here']);
-					}
+		else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
 
-				 return false;
+		return false;
 	}
 	public function deleteEmpAction($id)
 	{
 		
-	if (!$this->request->isPost() && !$this->request->isAjax()) {
-	           return $this->response->redirect('crud');
-	           }
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('crud');
+		}
 
-			$id = $this->filter->sanitize($id, 'int');
-			
-			$emps = Employee::findFirst($id);
+		$id = $this->filter->sanitize($id, 'int');
+		
+		$emps = Employee::findFirst($id);
 			// echo json_encode($emps);
 
-			if (!$emps) {
+		if (!$emps) {
 				// pag walang ganun
-				$this->response->redirect('crud');
-			}
+			$this->response->redirect('crud');
+		}
 		if ($emps->delete()) {
-					echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-				
-			} else {
-		        	echo json_encode(["status" => 'error','message' => 'Error Here']);
-				
-			}
-		   	return false;
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		} else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+			
+		}
+		return false;
 
 	}
 

@@ -17,16 +17,16 @@ class Tblfollow extends Model
 		$this->getSource('tblfollow');
 
 		// map the relationship to category model
-        $this->belongsTo('profile_id', __NAMESPACE__ .'User', 'id', 
+        $this->belongsTo('profile_id', __NAMESPACE__ .'\User', 'id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
         );
 
 		// map the relationship to category model
-        $this->belongsTo('follower', __NAMESPACE__ .'User', 'id', 
+        $this->belongsTo('follower', __NAMESPACE__ .'\User', 'id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
         );
 
-        $this->belongsTo('following', __NAMESPACE__ .'User', 'id', 
+        $this->belongsTo('following', __NAMESPACE__ .'\User', 'id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
         );
 

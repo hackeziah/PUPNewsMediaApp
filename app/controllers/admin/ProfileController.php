@@ -3,6 +3,8 @@
 namespace NewsApp\Controllers\Admin;
 
 use NewsApp\Models\Tblnews;
+use NewsApp\Models\Tblprofile;
+use NewsApp\Forms\ProfileForm;
 
 class ProfileController extends ControllerBase
 {
@@ -134,6 +136,17 @@ public function deleteEmpAction($id)
 
 	        return false;
 	}
+
+
+	public function inAction()
+	{
+			$id = $this->session->get('authUser');
+			$profile= Tblprofile::findFirst($id['id']);
+			$profileForm = new ProfileForm($profile);	
+		
+	}
+
+
 
 
 
