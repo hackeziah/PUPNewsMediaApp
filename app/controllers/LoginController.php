@@ -65,12 +65,26 @@ class LoginController extends Controller
 					if ($user->access == 'admin'){
 						$this->session->set('authAdmin', $auth);
 						$this->session->set('id', $user->id);
+
+						
+						$query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
+						$profileId = $query->execute( [
+							"user_id" => $user_id,
+						]);
+
+
+						// SELECT orders.*, orders_products.* FROM orders
+						// JOIN orders_products on orders_products.user_id = orders.user_id
+						// WHERE `orders.user_id` = :user_id;
+
+
+						$this->session->set('profileID',$profileId);  
 						
 
 					}else{
 						$this->session->set('authUser', $auth);
 						$this->session->set('id', $user->id);
-				
+
 
 					}
 

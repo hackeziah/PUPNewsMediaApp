@@ -6,6 +6,7 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 use NewsApp\Models\Tblannouncements;
 use NewsApp\Models\User;
 use NewsApp\Models\Tblprofile;
+use NewsApp\Forms\ProfileForm;
 class ManageAnnouncementsController extends ControllerBase
 {
 	public function indexAction()
@@ -56,6 +57,41 @@ class ManageAnnouncementsController extends ControllerBase
 		]);
 
 		$this->view->annouces = $paginator->getPaginate();	
+		
+		$user_id = $this->session->get('id'); 
+		// echo var_dump($user_id);
+		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
+		// $profileId = $query->execute( [
+		// 	"user_id" => $user_id,
+		// ]);
+
+
+		// $this->session->set('profileID',$profileId); 
+
+
+		// $profileID = $this->session->get('profileID'); 
+		
+		
+
+
+		// // display student detail here
+		// // $id = $this->filter->sanitize($id, 'int');
+		
+		// $profile = Tblprofile::findFirst($profileID);
+		// $ProfileForm = new StudentForm($student);
+		// $this->view->ProfileForm = $ProfileForm;
+		// $this->session->set(, $user->id);
+
+
+
+	 //   	$profileId = $this->request->getPost('profileId', 'int');
+
+
+		// // $ins = Tblannouncements::findFirst($announce_id);
+
+	 //     $profiles = Tblprofile::findFirst($profileId);
+
+		// $this->view->profiles=$profiles;
 
 
 	}
@@ -63,27 +99,32 @@ class ManageAnnouncementsController extends ControllerBase
 	public function createannounceAction()
 	{
 
+		$profileID = $this->session->get('profileID'); 
 		
+		// $stmt = Tblprofile::findFirst($profileID);
+ 		
+ 		
+		// echo json_encode($stmt);
+
+
+		// $prof= new ProfileForm($stmt);
+
+		// $this->view->ProfileForm = $ProfileForm;
 		
 		//  $profile = Tblprofile::findFirst($profileId);
 		// $this->view->profileId=$profileId;
+
 
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
 			return $this->response->redirect('admin/manageannouncements');
 		}
 
-		$user_id = $this->session->get('id'); 
-		// echo var_dump($user_id);
-		$query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
-		$profileId = $query->execute( [
-			"user_id" => $user_id,
-		]);
-		$this->view->profileId=$profileId;
+		
 
 
 		
-		
-		$profile_id = $this->request->getPost('profile_id');
+
+		// $profile_id = $this->request->getPost('profile_id');
 
 		$title = $this->request->getPost('title');
 		$content = $this->request->getPost('content');
@@ -93,7 +134,7 @@ class ManageAnnouncementsController extends ControllerBase
 		$ins = new Tblannouncements();
 
 
-		$ins->profile_id	=  $profile_id;
+		$ins->$profileID 	=  $$profileID ;
 		$ins->title	=  $title;
 		$ins->content	=  $content;
 		$ins->timestamp	=  $timestamp;

@@ -105,7 +105,7 @@
 
 
                 <li class="active">
-                    <a href="<?= $this->url->get('admin/events') ?>">
+                    <a href="<?= $this->url->get('admin/ManageEvents/events') ?>">
 
                         <i class="material-icons">event_note</i>
                         <span>Events Calendar</span>

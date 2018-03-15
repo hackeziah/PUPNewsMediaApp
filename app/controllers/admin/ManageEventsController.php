@@ -23,6 +23,47 @@ class ManageEventsController extends ControllerBase
 	}
 
 
+	public function eventsAction()
+	{
+		$events = Tblevents::find();
+		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
+		$paginator = new Paginator([
+			'data' => $events,
+			'limit' => 3,
+			'page' => $currentPage
+		]);
+
+		$this->view->events = $paginator->getPaginate();	
+		
+		$user_id = $this->session->get('id'); 
+		// echo var_dump($user_id);
+		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
+		// $profileId = $query->execute( [
+		// 	"user_id" => $user_id,
+		// ]);
+
+
+		// $this->session->set('profileID',$profileId); 
+
+
+		// $profileID = $this->session->get('profileID'); 
+		// echo var_dump($profileID);
+		// $this->session->set(, $user->id);
+
+
+
+	 //   	$profileId = $this->request->getPost('profileId', 'int');
+
+
+		// // $ins = Tblannouncements::findFirst($announce_id);
+
+	 //     $profiles = Tblprofile::findFirst($profileId);
+
+		// $this->view->profiles=$profiles;
+
+
+	}
+
 	public function createeventsAction()
 	{
 	
@@ -61,7 +102,7 @@ class ManageEventsController extends ControllerBase
 	}
 
 	
-	public function detailAction($event_id)
+	public function detaileventsAction($event_id)
 	{
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
 			return $this->response->redirect('admin/manageevents');
@@ -134,7 +175,7 @@ class ManageEventsController extends ControllerBase
 	}
 
 
-	public function deleteeventsAction($event_id)
+	public function deleteventsAction($event_id)
 	{
 	
 		if (!$this->request->isPost() && !$this->request->isAjax()) {

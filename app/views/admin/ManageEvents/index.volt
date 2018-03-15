@@ -31,7 +31,6 @@
          <td>{{ data.event_id }}</td>
          <td>{{ data.profile.firstname|e|capitalize }} {{ data.profile.middlename|e|capitalize }} {{ data.profile.lastname|e|capitalize }}</td>
          <td>{{ data.title|e|capitalize }}</td>
-         <td>{{ data.content|e|capitalize }}</td>
          <td>{{ data.timestamp|e|capitalize }}</td>
 
 
@@ -41,7 +40,7 @@
           <!-- <button class="btn btn-success" onclick="delete({{ data.id }})"><i class="glyphicon glyphicon-trash"></i> DELETE</button> -->
 
           <!-- <button class="btn btn-warning" onclick="edit_student(<?php echo $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button> -->
-          <button class="btn btn-danger" onclick="detail({{ data.event_id }})"><i class="glyphicon glyphicon-pencil"></i></button>
+          <button class="btn btn-danger" onclick="detailevents({{ data.event_id }})"><i class="glyphicon glyphicon-pencil"></i></button>
           <button class="btn btn-danger" onclick="deleteevents({{ data.event_id }})"><i class="glyphicon glyphicon-remove"></i></button>
 
 
@@ -84,7 +83,7 @@ function add_cat()
 
 
 
-  function detail(event_id)
+  function detailevents(event_id)
   {
    save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
@@ -92,7 +91,7 @@ function add_cat()
       //Ajax Load data from ajax
       $.ajax({
 
-      	url : "{{ url('admin/manageevents/detail') }}/" + event_id,
+      	url : "{{ url('admin/manageevents/detailevents') }}/" + event_id,
       	type: "GET",
       	dataType: "JSON",
       	success: function(data)

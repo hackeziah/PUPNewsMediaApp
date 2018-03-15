@@ -65,7 +65,7 @@
 
 
                      <li class="active">
-                        <a href="{{ url("user/events")}}">
+                         <a href="{{ url("user/announcements/events")}}">
                         
                             <i class="material-icons">event_note</i>
                             <span>Events Calendar</span>

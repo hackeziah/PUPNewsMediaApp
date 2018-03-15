@@ -11,14 +11,7 @@ class UserController extends Controller{
 
 	public function indexAction (){
 
-
-		
-		
 	}
-
-
-
-
 
 	public function announcementsAction()
 	{

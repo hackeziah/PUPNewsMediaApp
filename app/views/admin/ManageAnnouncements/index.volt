@@ -31,7 +31,7 @@
          <td>{{ data.announce_id }}</td>
          <td>{{ data.profile.firstname|e|capitalize }} {{ data.profile.middlename|e|capitalize }} {{ data.profile.lastname|e|capitalize }}</td>
          <td>{{ data.title|e|capitalize }}</td>
-        
+
          <td>{{ data.timestamp|e|capitalize }}</td>
 
 
@@ -47,17 +47,12 @@
 
         </td>
       </tr>
-<!-- 
-
-      $name = $this->session->get('profile_id');
-
-    var_dump($name);
- -->
-
-
-
 
       {% endfor %}
+
+
+
+
     </table>
     <ul class="pagination pull-right">
       <li>{{ link_to('admin/manageannouncements', 'First') }}</li>
@@ -91,7 +86,7 @@ function add_announce()
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
     //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
-}
+  }
 
 
 
@@ -201,37 +196,45 @@ function add_announce()
         <div class="form-body">
 
          <input name="announce_id" class="form-control" type="hidden">
-         <input name="profileId" class="form-control" type="text" >
+<!-- 
+ {% for datas in profiles %} -->
+ <input name="profile" value='' class="form-control" type="text" >
+
+   <!--        {{datas.profile_id}}
+     {% endfor %} -->
 
 
-         <div class="form-group">
-          <label class="control-label col-md-3">Title</label>
-          <div class="col-md-9">
-            <div class="form-line">
-             <input name="title" placeholder="Title" class="form-control" type="text">
-           </div>
-         </div>
-       </div>
 
-       <div class="form-group">
-        <label class="control-label col-md-3">Content</label>
-        <div class="col-md-9">
+<!--  -->
 
-         <div class="form-line">
-          <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-md-3">Date</label>
+     <div class="form-group">
+      <label class="control-label col-md-3">Title</label>
       <div class="col-md-9">
         <div class="form-line">
-         <input name="timestamp"  placeholder="Date" class="form-control" disabled="true">
+         <input name="title" placeholder="Title" class="form-control" type="text">
        </div>
      </div>
    </div>
 
+   <div class="form-group">
+    <label class="control-label col-md-3">Content</label>
+    <div class="col-md-9">
+
+     <div class="form-line">
+      <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label col-md-3">Date</label>
+  <div class="col-md-9">
+    <div class="form-line">
+     <input name="timestamp"  placeholder="Date" class="form-control" disabled="true">
+   </div>
  </div>
+</div>
+
+</div>
 </form>
 </div>
 <div class="modal-footer">

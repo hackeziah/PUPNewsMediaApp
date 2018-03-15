@@ -65,7 +65,7 @@
 
 
                      <li class="active">
-                        <a href="<?= $this->url->get('user/events') ?>">
+                         <a href="<?= $this->url->get('user/announcements/events') ?>">
                         
                             <i class="material-icons">event_note</i>
                             <span>Events Calendar</span>

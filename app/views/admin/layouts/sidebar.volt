@@ -105,7 +105,7 @@
 
 
                 <li class="active">
-                    <a href="{{ url("admin/events")}}">
+                    <a href="{{ url("admin/ManageEvents/events")}}">
 
                         <i class="material-icons">event_note</i>
                         <span>Events Calendar</span>
