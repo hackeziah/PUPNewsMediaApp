@@ -13,10 +13,6 @@ class ProfileController extends ControllerBase
 	{
 		$id = $this->session->get('authAdmin');
 		$user_id = $id['id'];
-			// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
-			// $stmt = $query->execute([
-			// 	'user_id'=>$user_id,
-			// ]);
 		$profile= Tblprofile::findFirstByUser_id($user_id);
 		$profileForm = new ProfileForm($profile);
 		$this->view->profileForm = $profileForm;
@@ -36,7 +32,22 @@ class ProfileController extends ControllerBase
 		$stmt = $query->execute([
 			'user_id'=>$user_id,
 		]);
-		var_dump($stmt);
+		// var_dump($stmt);
+	}
+
+
+
+	public function seeAction($user_id){
+
+		// $id = $this->session->get('authAdmin');
+		// $user_id = $id['id'];
+		$profile= Tblprofile::findFirstByUser_id($user_id);
+		$profileForm = new ProfileForm($profile);
+		$this->view->profileForm = $profileForm;
+		$this->view->profile = $profile;
+		$category = Tblcategory::find();
+		$this->view->category = $category;
+
 	}
 	public function updateAction()
 	{
@@ -89,7 +100,7 @@ class ProfileController extends ControllerBase
 			foreach ($this->request->getUploadedFiles() as $file) {
 				$file->moveTo($upload_dir . $file->getName());
 				$this->flashSession->success($file->getName().' has been successfully uploaded.');
-							}
+			}
 
 			
 			$news->title = $this->request->getPost('title');
@@ -100,14 +111,14 @@ class ProfileController extends ControllerBase
 			$news->status = 1;
 			$news->news_id = 1;
 			if( strlen($file->getName()) >= 1 ){
-					$news->file = $file->getName();
-				}
+				$news->file = $file->getName();
+			}
 
 			
 			// if($this->request->getPost('status') == 'private' ){
 			// 	$news->status = 'PRIVATE';
 			// }else{
-				
+
 
 			if($news->save()==false){
 				foreach ($news->getMessages() as $message) {

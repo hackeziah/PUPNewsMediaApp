@@ -22,7 +22,8 @@ class Tblprofile extends Model
 		// $this->setSource('tblCategory');
 		$this->setSource('tblprofile');
 		// $this->setSource('category');
-
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 		// map the relationship to profile model
 
          $this->belongsTo('user_id', __NAMESPACE__ .'\User', 'id', 

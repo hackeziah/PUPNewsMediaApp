@@ -16,6 +16,8 @@ class Employee extends Model
 	public function initialize()
 	{
 		$this->getSource('employee');
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 
 	}
 

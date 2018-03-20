@@ -5,11 +5,10 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Db\Adapter\Pdo\Mysql as DbAdapter;
+use Phalcon\Db\Adapter\Pdo\Mysql as DbReplicaAdapter;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-
 use Phalcon\Flash\Direct as Flash;
-
 use App\Plugins\Guid;
 use App\Plugins\Email;
 
@@ -27,7 +26,18 @@ $di->set('db',
         ]);
     }
 );
-
+//For DB ReplicaAdapter
+$di->set('dbReplica',
+    function () use ($config) {
+        return new DbReplicaAdapter([
+            'host' => $config->databaseReplica->host,
+            'username' => $config->databaseReplica->username,
+            'password' => $config->databaseReplica->password,
+            'dbname' => $config->databaseReplica->dbname,
+            'charset' => $config->databaseReplica->charset
+        ]);
+    }
+);
 //url resolver
 $di->set('url',
     function () use ($config) {

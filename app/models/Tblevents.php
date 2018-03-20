@@ -16,12 +16,13 @@ class Tblevents extends Model
 	public function initialize()
 	{
 		$this->getSource('tblevents');
-
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 	// map the relationship to category models
-        $this->belongsTo('profile_id', __NAMESPACE__ .'\Tblprofile', 'profile_id', 
-            ['foreignKey' => ['message' => 'The profile does not exist'], 'alias' => 'profile']
-        );
-     
+		$this->belongsTo('profile_id', __NAMESPACE__ .'\Tblprofile', 'profile_id', 
+			['foreignKey' => ['message' => 'The profile does not exist'], 'alias' => 'profile']
+		);
+		
 	}
 
 }

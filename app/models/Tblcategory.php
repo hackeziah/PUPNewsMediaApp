@@ -15,6 +15,8 @@ class Tblcategory extends Model
 		// $this->setSource('category');
 
 
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 
-	}
+}
 }

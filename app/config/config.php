@@ -11,6 +11,16 @@ return new Config([
         'dbname' => 'dbpupnewsmediaapp',
         'charset' => 'utf8'
     ],
+    
+    'databaseReplica' => [
+        'adapter' => 'Mysql',
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'dbname' => 'dbreplicapupnewsmediaapp',
+        'charset' => 'utf8'
+    ],
+
     'application' => [
         'controllersDir' => APP_PATH . '/controllers/',
         'modelsDir' => APP_PATH . '/models/',

@@ -13,6 +13,9 @@ class User extends Model
 
 	public function initialize()
 	{
+
 		$this->setSource('user');
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 	}
 }

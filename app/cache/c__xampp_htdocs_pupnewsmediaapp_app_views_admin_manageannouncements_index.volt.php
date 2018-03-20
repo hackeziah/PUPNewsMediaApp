@@ -212,11 +212,6 @@ function add_announce()
 
          <input name="announce_id" class="form-control" type="hidden">
          <input name="profile" value="<?= $profile->user_id ?>" class="form-control" type="hidden">
-
-
-
-      
-
          <div class="form-group">
           <label class="control-label col-md-3">Title</label>
           <div class="col-md-9">

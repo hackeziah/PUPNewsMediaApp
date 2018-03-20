@@ -14,7 +14,8 @@ class Tblmagazinenews extends Model
 	public function initialize()
 	{
 		$this->getSource('tblmagazinenews');
-
+		// $this->setReadConnectionService("dbReplica");
+		// $this->setWriteConnectionService("db");
 		// map the relationship to category model
         $this->belongsTo('magazine_id', __NAMESPACE__ .'\Tblmagazine', 'magazine_id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'magazine']
