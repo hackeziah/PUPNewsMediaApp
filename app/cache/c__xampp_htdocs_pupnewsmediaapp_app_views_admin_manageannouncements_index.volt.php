@@ -18,8 +18,7 @@
          <th>Announcement ID</th>
          <th>Profile Name</th>
          <th>Title</th>
-         <th>Content</th>
-         <th>Date and Time</th>
+         <!-- <th>Date and Time</th> -->
        </tr>
 
 
@@ -32,7 +31,7 @@
          <td><?= ucwords($this->escaper->escapeHtml($data->profile->firstname)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->middlename)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->lastname)) ?></td>
          <td><?= ucwords($this->escaper->escapeHtml($data->title)) ?></td>
 
-         <td><?= ucwords($this->escaper->escapeHtml($data->timestamp)) ?></td>
+         <!-- <td><?= ucwords($this->escaper->escapeHtml($data->timestamp)) ?></td> -->
 
 
 
@@ -76,6 +75,7 @@
 <?= $this->tag->javascriptInclude('plugins/bootstrap/js/bootstrap.js') ?>
 <?= $this->tag->javascriptInclude('js/demo.js') ?>
 
+
 <script type="text/javascript">
 var save_method;
 var table;
@@ -86,13 +86,15 @@ function add_announce()
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
     //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
-  }
+      $('.modal-title').text('Add Announcement'); // Set title to Bootstrap modal title
+
+    }
 
 
 
-  function detailAnnounce(announce_id)
-  {
-   save_method = 'edit';
+    function detailAnnounce(announce_id)
+    {
+     save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
 
       //Ajax Load data from ajax
@@ -106,22 +108,22 @@ function add_announce()
 
 
 
-      		$('[name="announce_id"]').val(data.announce_id);
+          $('[name="announce_id"]').val(data.announce_id);
           $('[name="profile_id"]').val(data.profile_id);
           $('[name="title"]').val(data.title);
           $('[name="content"]').val(data.content);
-          $('[name="timestamp"]').val(data.timestamp);
+          $('[value="timestamp"]').val(data.timestamp);
 
+          
+              $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+              $('.modal-title').text('Edit Announcement'); // Set title to Bootstrap modal title
 
-            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Book'); // Set title to Bootstrap modal title
-
-          },
-          error: function (jqXHR, textStatus, errorThrown)
-          {
-           alert('Error get data from ajax');
-         }
-       });
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+             alert('Error get data from ajax');
+           }
+         });
     }
 
     function save()
@@ -157,10 +159,23 @@ function add_announce()
      }
 
 
-     function deleteAnnoun(announce_id){
+     function deleteAnnounce(announce_id){
 
+      // swal({
+      //   title: "Are you sure?",
+      //   text: "Your will not be able to recover this imaginary file!",
+      //   type: "warning",
+      //   showCancelButton: true,
+      //   confirmButtonClass: "btn-danger",
+      //   confirmButtonText: "Yes, delete it!",
+      //   closeOnConfirm: false
+      // },
+      // function(){
+      //   swal("Deleted!", "Your imaginary file has been deleted.", "success");
+      // });
       if(confirm('Are you sure delete this data?'))
       {
+
        $.ajax({
         url : "<?= $this->url->get('admin/manageannouncements/deleteAnnounce') ?>/" + announce_id,         
         type: "POST",
@@ -196,45 +211,33 @@ function add_announce()
         <div class="form-body">
 
          <input name="announce_id" class="form-control" type="hidden">
-<!-- 
- <?php foreach ($profiles as $datas) { ?> -->
- <input name="profile" value='' class="form-control" type="text" >
-
-   <!--        <?= $datas->profile_id ?>
-     <?php } ?> -->
+         <input name="profile" value="<?= $profile->user_id ?>" class="form-control" type="hidden">
 
 
 
-<!--  -->
+      
 
-     <div class="form-group">
-      <label class="control-label col-md-3">Title</label>
-      <div class="col-md-9">
-        <div class="form-line">
-         <input name="title" placeholder="Title" class="form-control" type="text">
+         <div class="form-group">
+          <label class="control-label col-md-3">Title</label>
+          <div class="col-md-9">
+            <div class="form-line">
+             <input name="title" placeholder="Title" class="form-control" type="text">
+           </div>
+         </div>
        </div>
-     </div>
-   </div>
 
-   <div class="form-group">
-    <label class="control-label col-md-3">Content</label>
-    <div class="col-md-9">
+       <div class="form-group">
+        <label class="control-label col-md-3">Content</label>
+        <div class="col-md-9">
 
-     <div class="form-line">
-      <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+         <div class="form-line">
+          <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="form-group">
-  <label class="control-label col-md-3">Date</label>
-  <div class="col-md-9">
-    <div class="form-line">
-     <input name="timestamp"  placeholder="Date" class="form-control" disabled="true">
-   </div>
- </div>
-</div>
 
-</div>
+
+  </div>
 </form>
 </div>
 <div class="modal-footer">

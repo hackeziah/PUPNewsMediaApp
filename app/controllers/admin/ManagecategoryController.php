@@ -7,6 +7,13 @@ use NewsApp\Models\Tblcategory;
 
 class ManagecategoryController extends ControllerBase
 {
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authAdmin')){
+			$this->response->redirect('index');
+		}
+	}
+
 	public function indexAction()
 	{
 		$cat = Tblcategory::find();

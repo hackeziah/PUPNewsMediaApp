@@ -6,7 +6,14 @@ use NewsApp\Models\Employee;
 
 
 class EmployeeController extends ControllerMain
-{
+{	
+
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authUser')){
+			$this->response->redirect('index');
+		}
+	}
 
 	public function indexAction()
 	{
@@ -33,10 +40,10 @@ class EmployeeController extends ControllerMain
 			}
 
 			//flash to specified action
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "new"
-            ]);
+			return $this->dispatcher->forward([
+				"controller" => "employee",
+				"action" => "new"
+			]);
 		}
 
 		// if all good then save
@@ -55,10 +62,10 @@ class EmployeeController extends ControllerMain
 		} else {
 			// flash error muna
 			$this->flash->error($employee->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "new"
-            ]);
+			return $this->dispatcher->forward([
+				"controller" => "employee",
+				"action" => "new"
+			]);
 		}
 	}
 	
@@ -96,7 +103,7 @@ class EmployeeController extends ControllerMain
 		$employee->lastname = $this->request->getPost('lastname');
 		$employee->age = $this->request->getPost('age', 'int');
 		$employee->address = $this->request->getPost('address');
-	
+
 
 		//save here
 		if ($employee->save()) {
@@ -108,11 +115,11 @@ class EmployeeController extends ControllerMain
 		} else {
 			// flash error muna
 			$this->flash->error($employee->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "detail",
-                "params" => [$id]
-            ]);
+			return $this->dispatcher->forward([
+				"controller" => "employee",
+				"action" => "detail",
+				"params" => [$id]
+			]);
 		}
 
 	}
@@ -133,10 +140,10 @@ class EmployeeController extends ControllerMain
 			$this->response->redirect('employee');
 		} else {
 			$this->flash->error($student->getMessages());
-            return $this->dispatcher->forward([
-                "controller" => "employee",
-                "action" => "index"
-            ]);
+			return $this->dispatcher->forward([
+				"controller" => "employee",
+				"action" => "index"
+			]);
 		}
 	}
 

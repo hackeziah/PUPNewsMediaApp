@@ -68,6 +68,9 @@
 <script type="text/javascript">
  	var save_method;
   var table;
+
+
+  
     function deleteEmp(id){
 
             if(confirm('Are you sure delete this data?'))

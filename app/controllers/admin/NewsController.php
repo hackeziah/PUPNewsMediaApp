@@ -3,7 +3,14 @@ namespace NewsApp\Controller\Admin;
 use NewsApp\Models\Tblnews;
 
 class NewsController extends ControllerBase
-{
+{	
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authAdmin')){
+			$this->response->redirect('index');
+		}
+	}
+
 	public function indexAction()
 	{
 		$news = Tblnews::find();

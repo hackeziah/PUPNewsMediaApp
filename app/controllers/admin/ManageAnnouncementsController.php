@@ -7,8 +7,17 @@ use NewsApp\Models\Tblannouncements;
 use NewsApp\Models\User;
 use NewsApp\Models\Tblprofile;
 use NewsApp\Forms\ProfileForm;
+
 class ManageAnnouncementsController extends ControllerBase
 {
+
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authAdmin')){
+			$this->response->redirect('index');
+		}
+	}
+
 	public function indexAction()
 	{
 
@@ -23,25 +32,23 @@ class ManageAnnouncementsController extends ControllerBase
 
 		$this->view->annouce = $paginator->getPaginate();	
 
+		$id = $this->session->get('authAdmin');
+		$user_id = $id['id'];
 
-		// $user_id = $this->session->get('id'); 
-		// // echo var_dump($user_id);
-		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
-		// $pro  = $query->execute( [
-		// 	"user_id" => $user_id,
-		// ]);
-		// echo var_dump($pro);
-		// $user_id = $this->session->get('id'); 
-		// // echo var_dump($user_id);
-		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
-		// $profileId = $query->execute( [
-		// 	"user_id" => $user_id,
-		// ]);
+		$query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
+		$stmt = $query->execute([
+			'user_id'=>$user_id,
+		]);
+
+		// var_dump($query);
+		$profile= Tblprofile::findFirst($user_id);
 
 
-		// $profile= Tblprofile::findFirst($profileId);
+		$this->view->profile = $profile;
 
-		//  echo var_dump($profile);
+		$profileForm = new ProfileForm($profile);
+		$this->view->profileForm = $profileForm;
+
 
 	}
 
@@ -59,90 +66,43 @@ class ManageAnnouncementsController extends ControllerBase
 		$this->view->annouces = $paginator->getPaginate();	
 		
 		$user_id = $this->session->get('id'); 
-		// echo var_dump($user_id);
-		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id = :user_id:');
-		// $profileId = $query->execute( [
-		// 	"user_id" => $user_id,
-		// ]);
-
-
-		// $this->session->set('profileID',$profileId); 
-
-
-		// $profileID = $this->session->get('profileID'); 
 		
-		
-
-
-		// // display student detail here
-		// // $id = $this->filter->sanitize($id, 'int');
-		
-		// $profile = Tblprofile::findFirst($profileID);
-		// $ProfileForm = new StudentForm($student);
-		// $this->view->ProfileForm = $ProfileForm;
-		// $this->session->set(, $user->id);
-
-
-
-	 //   	$profileId = $this->request->getPost('profileId', 'int');
-
-
-		// // $ins = Tblannouncements::findFirst($announce_id);
-
-	 //     $profiles = Tblprofile::findFirst($profileId);
-
-		// $this->view->profiles=$profiles;
-
 
 	}
 
 	public function createannounceAction()
 	{
 
-		$profileID = $this->session->get('profileID'); 
-		
-		// $stmt = Tblprofile::findFirst($profileID);
- 		
- 		
-		// echo json_encode($stmt);
-
-
-		// $prof= new ProfileForm($stmt);
-
-		// $this->view->ProfileForm = $ProfileForm;
-		
-		//  $profile = Tblprofile::findFirst($profileId);
-		// $this->view->profileId=$profileId;
-
-
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
 			return $this->response->redirect('admin/manageannouncements');
 		}
 
+		$id = $this->session->get('authAdmin');
+		$user_id = $id['id'];
+
+		$profile= Tblprofile::findFirstByUser_id($user_id);
 		
 
-
+		$this->view->profile = $profile;
 		
-
-		// $profile_id = $this->request->getPost('profile_id');
 
 		$title = $this->request->getPost('title');
 		$content = $this->request->getPost('content');
-		$timestamp = $this->request->getPost('timestamp');
+		$profile = $this->request->getPost('profile');
+
 
 
 		$ins = new Tblannouncements();
 
-
-		$ins->$profileID 	=  $$profileID ;
+		// $student->first = 80;
+		$ins->profile_id 	= $profile;
 		$ins->title	=  $title;
 		$ins->content	=  $content;
-		$ins->timestamp	=  $timestamp;
+		
 
 
 
 		if ($ins->save()) {
-
 				// $this->session->set('message', 'New record has been added!');
 			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
 
@@ -184,33 +144,27 @@ class ManageAnnouncementsController extends ControllerBase
 		if (!$this->request->isPost() && !$this->request->isAjax()) {
 			return $this->response->redirect('admin/manageannouncements');
 		}
-				// $announce_id = $this->filter->sanitize('announce_id', 'int');
-		$announce_id = $this->request->getPost('announce_id', 'int');
-
+		$announce_id = $this->request->getPost('announce_id');
+		
 
 		$ins = Tblannouncements::findFirst($announce_id);
 
 		if (!$ins) {
-						// pag walang ganun ma record
+			// pag walang ganun ma record
 			$this->response->redirect('admin/manageannouncements');
 		}
 
-	        	// $category_name = $this->request->getPost('category_name');
+
+		$profile = $this->request->getPost('profile');
+		$title = $this->request->getPost('title');
+		$content = $this->request->getPost('content');
 
 
-
-
-		$ins->profile_id	= $this->request->getPost('profile_id');
-		$ins->title	= $this->request->getPost('title');
-		$ins->content	= $this->request->getPost('content');
-		$ins->timestamp	= $this->request->getPost('timestamp');
-		
-		
-
-
+		$ins->profile_id 	= $profile;
+		$ins->title	=  $title;
+		$ins->content	=  $content;
 
 		if ($ins->save()) {
-
 
 			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
 

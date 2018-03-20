@@ -1,153 +1,123 @@
 <?php
-
 namespace NewsApp\Controllers\Admin;
 
-use NewsApp\Models\Tblnews;
 use NewsApp\Models\Tblprofile;
 use NewsApp\Forms\ProfileForm;
+use NewsApp\Models\Tblcategory;
+use NewsApp\Models\Tblnews;
+
 
 class ProfileController extends ControllerBase
 {
 	public function indexAction()
 	{
-		$news = Tblnews::find();
-		$this->view->news = $news;		
-	}
+		$id = $this->session->get('authAdmin');
+		$user_id = $id['id'];
+			// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
+			// $stmt = $query->execute([
+			// 	'user_id'=>$user_id,
+			// ]);
+		$profile= Tblprofile::findFirstByUser_id($user_id);
+		$profileForm = new ProfileForm($profile);
+		$this->view->profileForm = $profileForm;
+		$this->view->profile = $profile;
+		$category = Tblcategory::find();
+		$this->view->category = $category;
 
-
-	public function editAction()
-	{
-			// check if post request if not redire
-		          	if (!$this->request->isPost() && !$this->request->isAjax()) {
-		          		return $this->response->redirect('crud');
-		          	}
-
-					if ( isset($_FILES) && ($_FILES["image"]["size"] > 0 )) { // if there was a file uploaded
-					        // Upload.class.php -> Upload::profileImage($_FILE); // return (string)filename or null
-
-						if (isset($_FILES["image"]["type"]) && ($_FILES["image"]["size"]) ) {
-								$validextensions = array("jpeg", "jpg", "png");
-								$temporary = explode(".", $_FILES["image"]["name"]);
-								$file_extension = end($temporary);
-
-					            // VALIDATE IMG FILE TYPE
-								if ( (($_FILES["image"]["type"] == "image/png") || ($_FILES["image"]["type"] == "image/jpg") || ($_FILES["image"]["type"] == "image/jpeg")) 
-					                && ($_FILES["image"]["size"] < 2000000) // allow only 500kb max
-					                && in_array($file_extension, $validextensions) ) {
-									if ($_FILES["image"]["error"] > 0) {
-					                    // $upload_error = [
-					                    //     'upload_error' => $_FILES["image"]["error"], 
-					                    // ];
-					                    // $error = (object) $upload_error; // cast array as object for response
-					                    // echo json_encode($error);
-										$error = "Invalid file size or file type"; 
-										echo json_encode($error);
-										die();
-									} else {
-					                    // PROCESS NEW IMG NAME
-												$orig_name = $_FILES['image']['name'];
-							                    $cut_orig_name = ( strlen($orig_name) > 10 ) ? substr($orig_name,0,10) : $orig_name; // if file name is > 10 characters, cut it to just 10.
-							                    $new_image_name = uniqid().'_'.$cut_orig_name. '.' .$file_extension; // uniqid() = 13 chars long. $new_image_name = 23 chars long.
-							                    // PROCESS FILE MOVEMENT
-							                    $sourcePath = $_FILES['image']['tmp_name']; // Storing source path of the file in a variable
-							                    $hard_path = dirname(__FILE__).'/../../public/uploads/'; // banktransfer image directory
-							                    $targetPath = $hard_path.$new_image_name; // Target path where file is to be stored
-
-							                    move_uploaded_file($sourcePath, $targetPath) ; // Move Uploaded file
-
-
-							                    $id = $this->request->getPost('id', 'int');
-							                    $ins = Employee::findFirst($id);
-
-
-							                    $firstname = $this->request->getPost('firstname', ['trim', 'string']);
-							                    $lastname	= $this->request->getPost('lastname');
-							                    $age		= $this->request->getPost('age','int');
-							                    $address  	= $this->request->getPost('address');
-							                    $image  	= $this->request->getPost('address');
-
-
-							                    $ins->id	=  $id;
-							                    $ins->firstname	=  $firstname;
-							                    $ins->lastname	=  $lastname;
-							                    $ins->age 		=  $age;
-							                    $ins->address 	=  $address;
-							                    $ins->image      =  $new_image_name;
-							                    if ($ins->save()) {
-
-										// $this->session->set('message', 'New record has been added!');
-
-						                    	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-
-							                    }
-							                    else {
-							                    	echo json_encode(["status" => 'error','message' => 'Error Here']);
-							                    }
-							                    return false;
-
-						                  }
-						                } else {
-						                // $error = "Allowable type: jpg/jpeg/png. Max size: 2mb."; 
-						                	$response = [
-						                		'response' => false,
-						                		'message' => 'Allowable type: jpg/jpeg/png. Max size: 2mb',
-						                	];
-						                	echo json_encode($error);
-						                	die();
-						                }
-						              }
-									} else {
-								        				// $new_image_name = null;
-								     $response = [
-								         'response' => false,
-								         'message' => 'Please upload image of payment',
-								          ];
-
-								        echo json_encode($response);
-								        die();
-								    }
-
-		}//edit
-
-
-
-
-
-public function deleteEmpAction($id)
-    {
-
-    if (!$this->request->isPost() && !$this->request->isAjax()) {
-       		return $this->response->redirect('crud');
-	    }
-	    $id = $this->filter->sanitize($id, 'int');
-
-	    $emps = Employee::findFirst($id);
-			// echo json_encode($emps);
-	    if (!$emps) {
-				// pag walang ganun
-	        $this->response->redirect('crud');
-	        }
-	    if ($emps->delete()) {
-	          	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-	        } else {
-	       		echo json_encode(["status" => 'error','message' => 'Error Here']);
-
-	        }
-
-	        return false;
-	}
-
-
-	public function inAction()
-	{
-			$id = $this->session->get('authUser');
-			$profile= Tblprofile::findFirst($id['id']);
-			$profileForm = new ProfileForm($profile);	
+		
 		
 	}
+	
+	public function viewAction()
+	{
+		$id = $this->session->get('authAdmin');
+		$user_id = $id['id'];
+		$query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
+		$stmt = $query->execute([
+			'user_id'=>$user_id,
+		]);
+		var_dump($stmt);
+	}
+	public function updateAction()
+	{
+		if($this->request->getPost('profile_id')){
+			$tblprofile = Tblprofile::findFirstByProfile_id($this->request->getPost('profile_id'));
+			if (true == $this->request->hasFiles() && $this->request->isPost()) {
+				$upload_dir = __DIR__ . '/../../../public/uploads/userss/';
 
+				if (!is_dir($upload_dir)) {
+					mkdir($upload_dir, 0755);
+				}
+				foreach ($this->request->getUploadedFiles() as $file) {
+					$file->moveTo($upload_dir . $file->getName());
+					$this->flashSession->success($file->getName().' has been successfully uploaded.');
+					
+				}
+				if($tblprofile->profilepic=='none' || strlen($file->getName()) >= 1 ){
+					$tblprofile->profilepic = $file->getName();
+				}
+				$tblprofile->firstname = $this->request->getPost('firstname');
+				$tblprofile->lastname = $this->request->getPost('lastname');
+				$tblprofile->middlename = $this->request->getPost('middlename');
+				$tblprofile->birthdate = $this->request->getPost('birthdate');
+				$tblprofile->email = $this->request->getPost('email');
+				$tblprofile->about = $this->request->getPost('about');
+				$tblprofile->goals = $this->request->getPost('goals');
+				if($tblprofile->save()==false){
+					foreach ($tblprofile->getMessages() as $message) {
+						echo $message;
+					}
+				}else{
+					$this->response->redirect('admin/profile');
+				}
 
+			}
+		}
+	}
+	public function createnewsAction()
+	{
+		if(!$this->request->isPost()){
+			$this->response->redirect('admin/profile');
+		}
+		$news = new Tblnews();
+		if (true == $this->request->hasFiles() && $this->request->isPost()) {
+			$upload_dir = __DIR__ . '/../../../public/uploads/News/';
 
+			if (!is_dir($upload_dir)) {
+				mkdir($upload_dir, 0755);
+			}
+			foreach ($this->request->getUploadedFiles() as $file) {
+				$file->moveTo($upload_dir . $file->getName());
+				$this->flashSession->success($file->getName().' has been successfully uploaded.');
+							}
 
+			
+			$news->title = $this->request->getPost('title');
+			$news->content = $this->request->getPost('content');
+			$news->category = $this->request->getPost('category');
+			$news->file = 'none';
+			$news->profile_id = 3;
+			$news->status = 1;
+			$news->news_id = 1;
+			if( strlen($file->getName()) >= 1 ){
+					$news->file = $file->getName();
+				}
 
+			
+			// if($this->request->getPost('status') == 'private' ){
+			// 	$news->status = 'PRIVATE';
+			// }else{
+				
+
+			if($news->save()==false){
+				foreach ($news->getMessages() as $message) {
+					echo $message;
+				}
+			}else{
+				$this->response->redirect('admin/profile');
+			}
+		}
+
+	}
 }
+

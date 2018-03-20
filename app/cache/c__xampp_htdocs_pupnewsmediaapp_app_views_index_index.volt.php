@@ -21,8 +21,11 @@
 <body class="login-page">
     <div class="login-box">
         <div class="logo">
-            <a href="javascript:void(0);">PUP<b>NewsMediaApp</b></a>
+            <a href="javascript:void(0);">
+            <?= $this->tag->image(['images/logo3.png']) ?>
+        </a>
             <small>PUP News and Social Media App</small>
+
         </div>
         <div class="card">
             <div class="body">

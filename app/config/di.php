@@ -10,6 +10,9 @@ use Phalcon\Session\Adapter\Files as SessionAdapter;
 
 use Phalcon\Flash\Direct as Flash;
 
+use App\Plugins\Guid;
+use App\Plugins\Email;
+
 $di = new FactoryDefault();
 
 //db connection
@@ -92,5 +95,19 @@ $di->set(
             'notice' => 'alert alert-info',
             'warning' => 'alert alert-warning'
         ]);
+    }
+);
+
+
+//custom user Components
+$di->set('guid',
+    function(){
+        return new Guid();
+    }
+);
+
+$di->set('email',
+    function(){
+        return new Email();
     }
 );

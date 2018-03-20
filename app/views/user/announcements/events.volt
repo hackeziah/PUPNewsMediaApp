@@ -76,7 +76,7 @@ function add_announce()
       //Ajax Load data from ajax
       $.ajax({
 
-        url : "{{ url('admin/manageevents/detailevents') }}/" + event_id,
+        url : "{{ url('user/announcements/detailevents') }}/" + event_id,
         type: "GET",
         dataType: "JSON",
         success: function(data)

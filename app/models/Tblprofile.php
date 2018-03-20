@@ -25,7 +25,7 @@ class Tblprofile extends Model
 
 		// map the relationship to profile model
 
-         $this->belongsTo('user_id', __NAMESPACE__ .'\User', 'user_id', 
+         $this->belongsTo('user_id', __NAMESPACE__ .'\User', 'id', 
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'user']
         );
 

@@ -9,13 +9,20 @@ use NewsApp\Models\Tblannouncements;
 
 class UserController extends Controller{
 
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authUser')){
+			$this->response->redirect('index');
+		}
+	}
+	
 	public function indexAction (){
 
 	}
 
 	public function announcementsAction()
 	{
-			$annouces = Tblannouncements::find();
+		$annouces = Tblannouncements::find();
 		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
 		$paginator = new Paginator([
 			'data' => $annouces,
@@ -24,7 +31,7 @@ class UserController extends Controller{
 		]);
 
 		$this->view->annouces = $paginator->getPaginate();	
- 		var_dump($annouces);
+		var_dump($annouces);
 	}
 
 

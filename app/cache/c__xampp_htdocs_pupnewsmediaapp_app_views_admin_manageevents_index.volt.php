@@ -18,8 +18,7 @@
          <th>Event ID</th>
          <th>Profile Name</th>
          <th>Title</th>
-         <th>Content</th>
-         <th>Date and Time</th>
+      
        </tr>
 
 
@@ -31,15 +30,7 @@
          <td><?= $data->event_id ?></td>
          <td><?= ucwords($this->escaper->escapeHtml($data->profile->firstname)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->middlename)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->lastname)) ?></td>
          <td><?= ucwords($this->escaper->escapeHtml($data->title)) ?></td>
-         <td><?= ucwords($this->escaper->escapeHtml($data->timestamp)) ?></td>
-
-
-
-
          <td>
-          <!-- <button class="btn btn-success" onclick="delete(<?= $data->id ?>)"><i class="glyphicon glyphicon-trash"></i> DELETE</button> -->
-
-          <!-- <button class="btn btn-warning" onclick="edit_student(<?php echo $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button> -->
           <button class="btn btn-danger" onclick="detailevents(<?= $data->event_id ?>)"><i class="glyphicon glyphicon-pencil"></i></button>
           <button class="btn btn-danger" onclick="deleteevents(<?= $data->event_id ?>)"><i class="glyphicon glyphicon-remove"></i></button>
 
@@ -101,7 +92,7 @@ function add_cat()
       		$('[name="profile_id"]').val(data.profile_id);
           $('[name="title"]').val(data.title);
           $('[name="content"]').val(data.content);
-          $('[name="timestamp"]').val(data.timestamp);
+
 
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
@@ -180,7 +171,7 @@ function add_cat()
     <div class="modal-dialog" role="document">
      <div class="modal-content">
       <div class="modal-header">
-       <h4 class="modal-title" id="defaultModalLabel">Add Event</h4>
+       <h4 class="modal-title" id="defaultModalLabel">Add Events</h4>
      </div>
      <div class="modal-body">
        <form action="#" id="form" class="form-horizontal">
@@ -188,8 +179,12 @@ function add_cat()
         <div class="form-body">
 
          <input name="event_id" class="form-control" type="hidden">
-         <input name="profile_id" class="form-control" type='text'>
-         
+         <input name="profile" value="<?= $profile->user_id ?>" class="form-control" type="hidden">
+
+
+
+        <?= $profileForm->render('profile_id', ['class' => 'form-control']) ?> 
+
 
          <div class="form-group">
           <label class="control-label col-md-3">Title</label>
@@ -205,19 +200,13 @@ function add_cat()
         <div class="col-md-9">
 
          <div class="form-line">
-          <textarea rows="5" name="content" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+          <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
         </div>
       </div>
     </div>
-    <div class="form-group">
-      <label class="control-label col-md-3">Date</label>
-      <div class="col-md-9">
-        <div class="form-line">
-          <input name="timestamp" placeholder="Timestamp" class="form-control" type="text">
-       </div>
-     </div>
-   </div>
- </div>
+
+
+  </div>
 </form>
 </div>
 <div class="modal-footer">
@@ -227,7 +216,6 @@ function add_cat()
 </div>
 </div>
 </div>
-
 
 
 

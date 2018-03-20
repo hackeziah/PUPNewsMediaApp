@@ -4,6 +4,14 @@ use NewsApp\Models\Tblnews;
 
 class NewsController extends ControllerBase
 {
+
+
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authUser')){
+			$this->response->redirect('index');
+		}
+	}
 	public function indexAction()
 	{
 		$news = Tblnews::find();
@@ -24,17 +32,17 @@ class NewsController extends ControllerBase
 				$file_extension = end($temporary);
 
 	            // VALIDATE IMG FILE TYPE
-			if ( (($_FILES["image"]["type"] == "image/png") || ($_FILES["image"]["type"] == "image/jpg") || ($_FILES["image"]["type"] == "image/jpeg")) 
+				if ( (($_FILES["image"]["type"] == "image/png") || ($_FILES["image"]["type"] == "image/jpg") || ($_FILES["image"]["type"] == "image/jpeg")) 
 	             && ($_FILES["image"]["size"] < 2000000) // allow only 500kb max
 	             && in_array($file_extension, $validextensions) ) {
 
 					if ($_FILES["image"]["error"] > 0) {
 						$error = "Invalid file size or file type"; 
-							echo json_encode($error);
-								die();
-						} else {
+						echo json_encode($error);
+						die();
+					} else {
 			                    // PROCESS NEW IMG NAME
-								$orig_name = $_FILES['image']['name'];
+						$orig_name = $_FILES['image']['name'];
 			                    $cut_orig_name = ( strlen($orig_name) > 10 ) ? substr($orig_name,0,10) : $orig_name; // if file name is > 10 characters, cut it to just 10.
 			                    $new_image_name = uniqid().'_'.$cut_orig_name. '.' .$file_extension; // uniqid() = 13 chars long. $new_image_name = 23 chars long.
 			                    // PROCESS FILE MOVEMENT
@@ -68,29 +76,29 @@ class NewsController extends ControllerBase
 
 			                    return false;
 
-			                  }
-	                } else {
+			                }
+			            } else {
 	                // $error = "Allowable type: jpg/jpeg/png. Max size: 2mb."; 
-	                	$response = [
-	                		'response' => false,
-	                		'message' => 'Allowable type: jpg/jpeg/png. Max size: 2mb',
-	                	];
-	                	echo json_encode($error);
-	                	die();
-	                }
-	              }
-	            } else {
-	            	$response = [
-	            		'response' => false,
-	            		'message' => 'Please upload image of payment',
-	            	];
-	            	echo json_encode($response);
-	            	die();
-	            }
+			            	$response = [
+			            		'response' => false,
+			            		'message' => 'Allowable type: jpg/jpeg/png. Max size: 2mb',
+			            	];
+			            	echo json_encode($error);
+			            	die();
+			            }
+			        }
+			    } else {
+			    	$response = [
+			    		'response' => false,
+			    		'message' => 'Please upload image of payment',
+			    	];
+			    	echo json_encode($response);
+			    	die();
+			    }
 
-	            if(!$this->request->isPost()  && $this->request->isAjax() ){
-	            	return $this->redirect('crud');
-	            }
+			    if(!$this->request->isPost()  && $this->request->isAjax() ){
+			    	return $this->redirect('crud');
+			    }
 	}//create
 
 
@@ -101,18 +109,18 @@ class NewsController extends ControllerBase
 ///detail
 	public function detailAction($id)
 	{
-	   if (!$this->request->isPost() && !$this->request->isAjax()) {
-	       return $this->response->redirect('crud');
-	       }
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('crud');
+		}
 
-	    $id = $this->filter->sanitize($id, 'int');
+		$id = $this->filter->sanitize($id, 'int');
 
-	    $emps = Employee::findFirst($id);
-	    	echo json_encode($emps);
-	    if (!$emps) {
+		$emps = Employee::findFirst($id);
+		echo json_encode($emps);
+		if (!$emps) {
 
-	   $this->response->redirect('crud');
-	 }
+			$this->response->redirect('crud');
+		}
 		return false;
 	}
 
@@ -121,34 +129,34 @@ class NewsController extends ControllerBase
 	public function editAction()
 	{
 			// check if post request if not redire
-		          	if (!$this->request->isPost() && !$this->request->isAjax()) {
-		          		return $this->response->redirect('crud');
-		          	}
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('crud');
+		}
 
 					if ( isset($_FILES) && ($_FILES["image"]["size"] > 0 )) { // if there was a file uploaded
 					        // Upload.class.php -> Upload::profileImage($_FILE); // return (string)filename or null
 
 						if (isset($_FILES["image"]["type"]) && ($_FILES["image"]["size"]) ) {
-								$validextensions = array("jpeg", "jpg", "png");
-								$temporary = explode(".", $_FILES["image"]["name"]);
-								$file_extension = end($temporary);
+							$validextensions = array("jpeg", "jpg", "png");
+							$temporary = explode(".", $_FILES["image"]["name"]);
+							$file_extension = end($temporary);
 
 					            // VALIDATE IMG FILE TYPE
-								if ( (($_FILES["image"]["type"] == "image/png") || ($_FILES["image"]["type"] == "image/jpg") || ($_FILES["image"]["type"] == "image/jpeg")) 
+							if ( (($_FILES["image"]["type"] == "image/png") || ($_FILES["image"]["type"] == "image/jpg") || ($_FILES["image"]["type"] == "image/jpeg")) 
 					                && ($_FILES["image"]["size"] < 2000000) // allow only 500kb max
 					                && in_array($file_extension, $validextensions) ) {
-									if ($_FILES["image"]["error"] > 0) {
+								if ($_FILES["image"]["error"] > 0) {
 					                    // $upload_error = [
 					                    //     'upload_error' => $_FILES["image"]["error"], 
 					                    // ];
 					                    // $error = (object) $upload_error; // cast array as object for response
 					                    // echo json_encode($error);
-										$error = "Invalid file size or file type"; 
-										echo json_encode($error);
-										die();
-									} else {
+									$error = "Invalid file size or file type"; 
+									echo json_encode($error);
+									die();
+								} else {
 					                    // PROCESS NEW IMG NAME
-												$orig_name = $_FILES['image']['name'];
+									$orig_name = $_FILES['image']['name'];
 							                    $cut_orig_name = ( strlen($orig_name) > 10 ) ? substr($orig_name,0,10) : $orig_name; // if file name is > 10 characters, cut it to just 10.
 							                    $new_image_name = uniqid().'_'.$cut_orig_name. '.' .$file_extension; // uniqid() = 13 chars long. $new_image_name = 23 chars long.
 							                    // PROCESS FILE MOVEMENT
@@ -180,7 +188,7 @@ class NewsController extends ControllerBase
 
 										// $this->session->set('message', 'New record has been added!');
 
-						                    	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+							                    	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
 
 							                    }
 							                    else {
@@ -188,27 +196,27 @@ class NewsController extends ControllerBase
 							                    }
 							                    return false;
 
-						                  }
-						                } else {
+							                }
+							            } else {
 						                // $error = "Allowable type: jpg/jpeg/png. Max size: 2mb."; 
-						                	$response = [
-						                		'response' => false,
-						                		'message' => 'Allowable type: jpg/jpeg/png. Max size: 2mb',
-						                	];
-						                	echo json_encode($error);
-						                	die();
-						                }
-						              }
-									} else {
+							            	$response = [
+							            		'response' => false,
+							            		'message' => 'Allowable type: jpg/jpeg/png. Max size: 2mb',
+							            	];
+							            	echo json_encode($error);
+							            	die();
+							            }
+							        }
+							    } else {
 								        				// $new_image_name = null;
-								     $response = [
-								         'response' => false,
-								         'message' => 'Please upload image of payment',
-								          ];
+							    	$response = [
+							    		'response' => false,
+							    		'message' => 'Please upload image of payment',
+							    	];
 
-								        echo json_encode($response);
-								        die();
-								    }
+							    	echo json_encode($response);
+							    	die();
+							    }
 
 	}//edit
 
@@ -217,27 +225,27 @@ class NewsController extends ControllerBase
 
 
 	public function deleteEmpAction($id)
-    {
+	{
 
-    if (!$this->request->isPost() && !$this->request->isAjax()) {
-       		return $this->response->redirect('crud');
-	    }
-	    $id = $this->filter->sanitize($id, 'int');
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('crud');
+		}
+		$id = $this->filter->sanitize($id, 'int');
 
-	    $emps = Employee::findFirst($id);
+		$emps = Employee::findFirst($id);
 			// echo json_encode($emps);
-	    if (!$emps) {
+		if (!$emps) {
 				// pag walang ganun
-	        $this->response->redirect('crud');
-	        }
-	    if ($emps->delete()) {
-	          	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-	        } else {
-	       		echo json_encode(["status" => 'error','message' => 'Error Here']);
+			$this->response->redirect('crud');
+		}
+		if ($emps->delete()) {
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+		} else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
 
-	        }
+		}
 
-	        return false;
+		return false;
 	}
 
 

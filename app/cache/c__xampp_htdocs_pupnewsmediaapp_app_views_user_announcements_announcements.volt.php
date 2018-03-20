@@ -20,7 +20,7 @@
 
 
                    <div class="list-group" >
-                    <a href="javascript:void(0);" class="list-group-item active" <?= $data->announce_id ?>  onclick="detailAnnounce(<?= $data->announce_id ?>)">
+                    <a href="javascript:void(0);" class="list-group-item active" <?= $data->announce_id ?>  onclick="detailannounce(<?= $data->announce_id ?>)">
                       <h4 class="list-group-item-heading"><?= ucwords($data->title) ?> BY : <?= ucwords($this->escaper->escapeHtml($data->profile->firstname)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->middlename)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->lastname)) ?> At <?= ucwords($this->escaper->escapeHtml($data->timestamp)) ?></h4>
                       <p class="list-group-item-text">
                        <?= ucwords($this->escaper->escapeHtml($data->content)) ?>
@@ -33,12 +33,16 @@
                  </div>
 
                  <?php } ?>
+
+
                </div>
+
+
                <ul class="pagination pull-right">
                 <li><?= $this->tag->linkTo(['user/announcements/announcements', 'First']) ?></li>
                 <li><?= $this->tag->linkTo(['user/announcements/announcements?page=' . $annouces->before, 'Previous']) ?></li>
                 <li><?= $this->tag->linkTo(['user/announcements/announcements?page=' . $annouces->next, 'Next']) ?></li>
-                <li><?= $this->tag->linkTo(['user/announcements/announcements?page=' . $annouces->last, 'Last']) ?></li>
+                <li><?= $this->tag->linkTo(['user/announcements/announcementys?page=' . $annouces->last, 'Last']) ?></li>
               </ul>
             </div>
           </div>
@@ -50,7 +54,7 @@
 </div>
 </section>
 
-<?= $this->getContent() ?>
+
 
 
 <script type="text/javascript">
@@ -67,7 +71,7 @@ function add_announce()
 
 
 
-  function detailAnnounce(announce_id)
+  function detailannounce(announce_id)
   {
    // save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
@@ -75,7 +79,7 @@ function add_announce()
       //Ajax Load data from ajax
       $.ajax({
 
-        url : "<?= $this->url->get('admin/manageannouncements/detailAnnounce') ?>/" + announce_id,
+        url : "<?= $this->url->get('user/announcements/detailannounce') ?>/" + announce_id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -107,49 +111,6 @@ function add_announce()
     </script>
 
 
-
-
-<!-- 
-
-
-
-  <div class="modal fade in" id="modal_form" tabindex="-1" role="dialog" style="display: block;">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-               <h4 class="modal-title" id="defaultModalLabel"></h4>
-            </div> 
-            <div class="modal-body">
-
-                  <?= ucwords($this->escaper->escapeHtml($data->content)) ?>
-
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-            </div>
-        </div>
-    </div>
-  </div> -->
-
-
-<!-- <div class="modal-content modal-col-red">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="defaultModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sodales orci ante, sed ornare eros vestibulum ut. Ut accumsan
-                            vitae eros sit amet tristique. Nullam scelerisque nunc enim, non dignissim nibh faucibus ullamcorper.
-                            Fusce pulvinar libero vel ligula iaculis ullamcorper. Integer dapibus, mi ac tempor varius, purus
-                            nibh mattis erat, vitae porta nunc nisi non tellus. Vivamus mollis ante non massa egestas fringilla.
-                            Vestibulum egestas consectetur nunc at ultricies. Morbi quis consectetur nunc.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-link waves-effect">SAVE CHANGES</button>
-                            <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                        </div>
-                    </div>
-                  -->
 
 
                   <div class="modal fade" id="modal_form" tabindex="-1" role="dialog">

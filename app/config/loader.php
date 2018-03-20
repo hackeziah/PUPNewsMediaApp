@@ -10,6 +10,7 @@ $loader->registerNamespaces([
     'NewsApp\Controllers\User' => $config->application->controllersDir.'\user',
     'NewsApp\Models' => $config->application->modelsDir,
     'NewsApp\Forms' => $config->application->formsDir,
+    // 'NewsApp\Plugins' => $config->application->pluginsDir
 ]);
 
 $loader->register();
