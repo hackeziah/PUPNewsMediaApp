@@ -31,5 +31,3 @@ class Tblnews extends Model
 	}
 
 }
-
-

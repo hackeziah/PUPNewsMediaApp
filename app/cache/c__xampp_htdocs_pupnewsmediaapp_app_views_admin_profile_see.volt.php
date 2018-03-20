@@ -11,7 +11,7 @@
       <div class="card">
         <div class="header">
           <h1>
-              
+
           </h1>
 
         </div>
@@ -81,15 +81,18 @@
                             <?= $profile->birthdate ?>
                           </div>
                         </div>
-
-
                         <div class="row clearfix">
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <i class="material-icons">group</i>Followers</a>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">favorite</i>Follow</a></button>
+                           
+                         </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
+                          
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-
-                          <i class="material-icons">group</i>Following</a>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
+                          
                         </div>
                       </div>
                     </div>
@@ -103,89 +106,35 @@
               </div>
 
 
-<!--  -->
-<!-- #END# Example Tab -->
+              <!--  -->
+              <!-- #END# Example Tab -->
 
 
-<div class="row clearfix">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card">
-      <div class="header bg-red">
-        <h1>
-          ABOUT
-        </h1>
-      </div>
-      <div class="body">
-        <?= nl2br($profile->about) ?>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row clearfix">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card">
-      <div class="header bg-red">
-        <h1>
-         GOALS
-       </h1>
-     </div>
-     <div class="body">
-      <?= nl2br($profile->goals) ?>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- //////////////////////////////////////////////////////////////// -->
-
-<div role="tabpanel" class="tab-pane fade" id="follow">
- <div class="row clearfix">
-  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <div class="card">
-      <div class="body">
-        <div class="row clearfix">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-              <div class="header bg-red">
-                <h1>
-                  FOLLOW
-                </h1>
-              </div>
-              <div class="body">
-
-                <div class="row clearfix">
-                 <div class="col-md-6">
+              <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
                     <div class="header bg-red">
                       <h1>
-                        FOLLOWER
+                        ABOUT
                       </h1>
                     </div>
                     <div class="body">
-
+                      <?= nl2br($profile->about) ?>
                     </div>
                   </div>
-
                 </div>
-                <div class="col-md-6">
-
+              </div>
+              <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
                     <div class="header bg-red">
                       <h1>
-                        FOLLOWING
-                      </h1>
-                    </div>
-                    <div class="body">
-
-                    </div>
+                       GOALS
+                     </h1>
+                   </div>
+                   <div class="body">
+                    <?= nl2br($profile->goals) ?>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -194,7 +143,61 @@
       </div>
     </div>
   </div>
-</div>                  
+
+
+  <!-- //////////////////////////////////////////////////////////////// -->
+
+  <div role="tabpanel" class="tab-pane fade" id="follow">
+   <div class="row clearfix">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="card">
+        <div class="body">
+          <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="header bg-red">
+                  <h1>
+                    FOLLOW
+                  </h1>
+                </div>
+                <div class="body">
+
+                  <div class="row clearfix">
+                   <div class="col-md-6">
+                    <div class="card">
+                      <div class="header bg-red">
+                        <h1>
+                          FOLLOWER
+                        </h1>
+                      </div>
+                      <div class="body">
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+
+                    <div class="card">
+                      <div class="header bg-red">
+                        <h1>
+                          FOLLOWING
+                        </h1>
+                      </div>
+                      <div class="body">
+
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>                  
 </div>      
 </div>
 

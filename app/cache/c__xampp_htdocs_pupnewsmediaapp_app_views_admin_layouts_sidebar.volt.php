@@ -15,8 +15,6 @@
                         <ul class="dropdown-menu pull-right">
                             <li><a href="<?= $this->url->get('admin/profile') ?>"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
-                            <li role="seperator" class="divider"></li>
                             <li><a href="<?= $this->url->get('logout') ?>"><i class="material-icons">input</i>Sign Out</a></li>
                             
                         </ul>

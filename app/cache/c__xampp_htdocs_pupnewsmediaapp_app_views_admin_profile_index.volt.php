@@ -84,13 +84,17 @@
 
 
                         <div class="row clearfix">
-                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                          <i class="material-icons">group</i>Followers</a>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">favorite</i>Follow</a></button>
+                           
+                         </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
+                          
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-
-                          <i class="material-icons">group</i>Following</a>
-                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
+                          
                       </div>
                     </div>
                   </div>

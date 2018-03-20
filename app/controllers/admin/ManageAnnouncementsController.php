@@ -30,6 +30,8 @@ class ManageAnnouncementsController extends ControllerBase
 			'page' => $currentPage
 		]);
 
+		
+
 		$this->view->annouce = $paginator->getPaginate();	
 
 		$id = $this->session->get('authAdmin');

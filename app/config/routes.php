@@ -58,6 +58,18 @@ $router->add('/admin', [
    'namespace' => 'NewsApp\Controllers\Admin',
    'controller' => 'index'
 ]);
+
+
+$router->add('/see-profile/:params', [
+   'namespace' => 'NewsApp\Controllers\Admin',
+   'controller' => 'profile',
+   'action' => 'see',
+   'params' => 1
+]);
+
+
+
+
 //Admin Router
 
 //User Router
