@@ -1,4 +1,33 @@
+<script type="text/javascript">
 
+// function followby() 
+// { 
+//  // $('#form')[0].reset(); 
+
+//  // url = "<?= $this->url->get('admin/profile/followby') ?>";
+//  url = "<?= $this->url->get('admin/profile/followby') ?>";
+
+//        // ajax adding data to database
+//        $.ajax({
+//         url : url,
+//         type: "POST",
+//         data: $('#form').serialize(),
+//         dataType: "JSON",
+//         success: function(data)
+//         {
+//                //if success close modal and reload ajax table
+//                $('#modal_form').modal('hide');
+//               location.reload();// for reload a page
+//             },
+//             error: function (jqXHR, textStatus, errorThrown)
+//             {
+//              alert('Error adding / update data');
+//            }
+//          });
+
+//      }
+
+// </script>
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
@@ -62,6 +91,10 @@
                                <div class="form-line">
                                 <h4>
                                   <?= $profile->firstname ?>&nbsp;<?= $profile->middlename ?>&nbsp;<?= $profile->lastname ?>
+
+                                  <br>
+
+                                  <!--    &nbsp;<?= $profile->profile_id ?> -->
                                 </h4>
                               </div>
                             </div>
@@ -83,57 +116,68 @@
                         </div>
                         <div class="row clearfix">
                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">favorite</i>Follow</a></button>
-                           
-                         </div>
-                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
-                          
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
-                          
+
+
+
+
+                            <form action="followby" class="form-horizontal">
+                              <input name="me" value="<?= $prof->profile_id ?>" class="form-control" type="text">
+                              <input name="you" value="<?= $profile->profile_id ?>" class="form-control" type="text">
+                              <button  id ="btnSave" type="submit" class="btn bg-light-blue waves-effect"><i class="material-icons">favorite</i>Follow</a></button>
+                            </form>
+
+
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
+
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-sm-3">
+
+                  </div>
+
                 </div>
 
-                <div class="col-sm-3">
 
-                </div>
-
-              </div>
+                <!--  -->
+                <!-- #END# Example Tab -->
 
 
-              <!--  -->
-              <!-- #END# Example Tab -->
-
-
-              <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="card">
-                    <div class="header bg-red">
-                      <h1>
-                        ABOUT
-                      </h1>
-                    </div>
-                    <div class="body">
-                      <?= nl2br($profile->about) ?>
+                <div class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                      <div class="header bg-red">
+                        <h1>
+                          ABOUT
+                        </h1>
+                      </div>
+                      <div class="body">
+                        <?= nl2br($profile->about) ?>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <div class="card">
-                    <div class="header bg-red">
-                      <h1>
-                       GOALS
-                     </h1>
-                   </div>
-                   <div class="body">
-                    <?= nl2br($profile->goals) ?>
+                <div class="row clearfix">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                      <div class="header bg-red">
+                        <h1>
+                         GOALS
+                       </h1>
+                     </div>
+                     <div class="body">
+                      <?= nl2br($profile->goals) ?>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -142,53 +186,53 @@
         </div>
       </div>
     </div>
-  </div>
 
 
-  <!-- //////////////////////////////////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////// -->
 
-  <div role="tabpanel" class="tab-pane fade" id="follow">
-   <div class="row clearfix">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <div class="card">
-        <div class="body">
-          <div class="row clearfix">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="card">
-                <div class="header bg-red">
-                  <h1>
-                    FOLLOW
-                  </h1>
-                </div>
-                <div class="body">
-
-                  <div class="row clearfix">
-                   <div class="col-md-6">
-                    <div class="card">
-                      <div class="header bg-red">
-                        <h1>
-                          FOLLOWER
-                        </h1>
-                      </div>
-                      <div class="body">
-
-                      </div>
-                    </div>
-
+    <div role="tabpanel" class="tab-pane fade" id="follow">
+     <div class="row clearfix">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="row clearfix">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card">
+                  <div class="header bg-red">
+                    <h1>
+                      FOLLOW
+                    </h1>
                   </div>
-                  <div class="col-md-6">
+                  <div class="body">
 
-                    <div class="card">
-                      <div class="header bg-red">
-                        <h1>
-                          FOLLOWING
-                        </h1>
-                      </div>
-                      <div class="body">
+                    <div class="row clearfix">
+                     <div class="col-md-6">
+                      <div class="card">
+                        <div class="header bg-red">
+                          <h1>
+                            FOLLOWER
+                          </h1>
+                        </div>
+                        <div class="body">
 
+                        </div>
                       </div>
+
                     </div>
+                    <div class="col-md-6">
 
+                      <div class="card">
+                        <div class="header bg-red">
+                          <h1>
+                            FOLLOWING
+                          </h1>
+                        </div>
+                        <div class="body">
+
+                        </div>
+                      </div>
+
+                    </div>
                   </div>
                 </div>
               </div>
@@ -196,9 +240,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>                  
-</div>      
+    </div>                  
+  </div>      
 </div>
 
 </div>
@@ -207,3 +250,10 @@
 
 </div>
 </section>
+
+
+
+
+
+
+

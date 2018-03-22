@@ -35,9 +35,11 @@
               </a>
 
             </ul>
-
             <!-- Tab panes -->
             <div class="tab-content">
+
+
+
               <div role="tabpanel" class="tab-pane fade in active" id="profile_with_icon_title">
                 <div class="row clearfix">
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -86,60 +88,61 @@
                         <div class="row clearfix">
                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                             <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">favorite</i>Follow</a></button>
-                           
-                         </div>
-                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
-                          
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
+
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
+
+                          </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Following</a></button>
-                          
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                <div class="col-sm-3">
+                    <div class="col-sm-3">
 
-                </div>
-
-              </div>
-              <div class="row clearfix">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="card">
-                 <div class="header bg-red">
-                  <h2>
-                   POST   
-                 </h2>
-                 <ul class="header-dropdown m-r--5">
-                 </ul>
-               </div>
-               <div class="body">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                 <li role="presentation" class="active"><a href="#postnews" data-toggle="tab">POST NEWS</a></li>
-                 <li role="presentation"><a href="#createmagazine" data-toggle="tab">CREATE MAGAZINE</a></li>           
-               </ul>
-               <div class="tab-content">
-                <!-- NEWS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-                <div role="tabpanel" class="tab-pane fade in active" id="postnews">
-                  <form action="profile/createnews" method="POST" id="news"  enctype="multipart/form-data" >
-                    <div class="row clearfix">
-                      <div class="row clearfix">
-                       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                        <div class="form-group">
-                          <div class="form-line">
-                           <input type="text" class="form-control date" placeholder="Title" name = 'title'>
-                         </div>
-                       </div>
-                     </div>
-                     <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
-                      <label></label>
                     </div>
-                    <!-- <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2"> -->
-                      <div>
-                        <div class="form-line">
+
+                  </div>
+                  <div class="row clearfix">
+                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                     <div class="header bg-red">
+                      <h2>
+                       POST   
+                     </h2>
+                     <ul class="header-dropdown m-r--5">
+                     </ul>
+                   </div>
+                   <div class="body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                     <li role="presentation" class="active"><a href="#postnews" data-toggle="tab">POST NEWS</a></li>
+                     <li role="presentation"><a href="#createmagazine" data-toggle="tab">CREATE MAGAZINE</a></li>           
+                   </ul>
+                   <div class="tab-content">
+                    <!-- NEWS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                    <div role="tabpanel" class="tab-pane fade in active" id="postnews">
+                      <form action="profile/createnews" method="POST" id="news"  enctype="multipart/form-data" >
+                        <div class="row clearfix">
+                          <div class="row clearfix">
+                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <div class="form-group">
+                              <div class="form-line">
+                               <input type="text" class="form-control date" placeholder="Title" name = 'title'>
+                               <input type="hidden" class="form-control date"  name = 'profile_id' value=<?= $profile->profile_id ?>>
+                             </div>
+                           </div>
+                         </div>
+                         <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
+                          <label></label>
+                        </div>
+                        <!-- <div class="col-lg-1 col-md-1 col-sm-2 col-xs-2"> -->
+                          <div>
+                            <div class="form-line">
                       <!-- <button type="file" class="btn btn-danger waves-effect">
                        <i class="material-icons">camera_enhance</i>
                      </button> -->
@@ -183,6 +186,7 @@
         </div>
       </form>
     </div>
+    <!-- end here -->
     <div role="tabpanel" class="tab-pane fade" id="createmagazine">
      <div class="row clearfix">
       <div class="row clearfix">
@@ -269,6 +273,13 @@
 </div>
 </div>
 </div>
+
+
+
+
+</div>
+
+
 <div role="tabpanel" class="tab-pane fade" id="profile_with_edit">
  <div class="row clearfix">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -374,9 +385,9 @@
   </div>
 </div>
 
-
+<div class="form-group">
 <!-- 
-       <div class="form-group">
+       
        
         <div class="col-md-9">
 
@@ -397,13 +408,14 @@
     </div>
   </form>
 
-
+</div>
 
 
 </div>
 </div>                  
 </div>      
 </div>
+
 </div>
 
 <!-- //////////////////////////////////////////////////////////////// -->
@@ -462,7 +474,7 @@
 </div>      
 </div>
 
-</div>
+
 </div>
 </div>
 

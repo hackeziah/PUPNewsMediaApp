@@ -96,7 +96,7 @@ function add_cat()
 
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Book'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit Event'); // Set title to Bootstrap modal title
 
           },
           error: function (jqXHR, textStatus, errorThrown)

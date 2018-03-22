@@ -19,14 +19,21 @@ class Tblnews extends Model
 		// $this->setReadConnectionService("dbReplica");
 		// $this->setWriteConnectionService("db");
 		// map the relationship to category model
-        $this->belongsTo('profile_id', __NAMESPACE__ .'\User', 'id', 
-            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
-        );
+        // $this->belongsTo('profile_id', __NAMESPACE__ .'\User', 'id', 
+        //     ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
+        // );
 		// map the relationship to profile model
 
-         $this->belongsTo('category', __NAMESPACE__ .'\Tblcategory', 'category_id', 
-            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'categorys']
-        );
+		$this->belongsTo('profile_id', __NAMESPACE__ .'\Tblprofile', 'profile_id', 
+			['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'profile']
+		);
+
+		// map the relationship to profile model
+
+		$this->belongsTo('category', __NAMESPACE__ .'\Tblcategory', 'category_id', 
+			['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'categories']
+		);
+
 
 	}
 

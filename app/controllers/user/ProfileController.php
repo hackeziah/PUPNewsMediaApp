@@ -37,6 +37,21 @@ class ProfileController extends ControllerBase
 		]);
 		var_dump($stmt);
 	}
+
+
+	
+
+	public function seeAction($user_id){
+
+		// $id = $this->session->get('authAdmin');
+		// $user_id = $id['id'];
+		$profile= Tblprofile::findFirstByUser_id($user_id);
+		$profileForm = new ProfileForm($profile);
+		$this->view->profileForm = $profileForm;
+		$this->view->profile = $profile;		
+
+	}
+
 	public function updateAction()
 	{
 		if($this->request->getPost('profile_id')){

@@ -30,6 +30,13 @@ class Tblprofile extends Model
             ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'user']
         );
 
+         	$this->belongsTo('profile_id', __NAMESPACE__ .'\Tblprofile', 'user_id', 
+			['foreignKey' => ['message' => 'The profile does not exist'], 'alias' => 'profile']
+		);
+
+		$this->belongsTo('user_id', __NAMESPACE__ .'\User', 'id', array(
+			 'alias' => 'User'
+		));
 
 	}
 

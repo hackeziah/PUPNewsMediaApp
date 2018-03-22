@@ -48,7 +48,7 @@
                           <div class="col-sm-4">
                             <div class="form-group">
 
-                             {{ image("uploads/userss/"~profile.profilepic,'width' : '59%', 'heigth' : '60%') }}
+                             <?= $this->tag->image(['uploads/userss/' . $profile->profilepic, 'width' => '59%', 'heigth' => '60%']) ?>
 
                            </div>
                          </div>
@@ -61,7 +61,7 @@
                                </span>
                                <div class="form-line">
                                 <h4>
-                                  {{profile.firstname}}&nbsp;{{profile.middlename}}&nbsp;{{profile.lastname}}
+                                  <?= $profile->firstname ?>&nbsp;<?= $profile->middlename ?>&nbsp;<?= $profile->lastname ?>
                                 </h4>
                               </div>
                             </div>
@@ -70,7 +70,7 @@
                                <i class="material-icons">accessibility</i>
                              </span>
                              <div class="form-line">
-                              {{profile.email}}
+                              <?= $profile->email ?>
                             </div>
                           </div>
                           <div class="input-group">
@@ -78,7 +78,7 @@
                              <i class="material-icons">perm_contact_calendar</i>
                            </span>
                            <div class="form-line">
-                            {{profile.birthdate}}
+                            <?= $profile->birthdate ?>
                           </div>
                         </div>
                         <div class="row clearfix">
@@ -119,7 +119,7 @@
                       </h1>
                     </div>
                     <div class="body">
-                      {{ profile.about|nl2br }}
+                      <?= nl2br($profile->about) ?>
                     </div>
                   </div>
                 </div>
@@ -133,7 +133,7 @@
                      </h1>
                    </div>
                    <div class="body">
-                    {{ profile.goals|nl2br }}
+                    <?= nl2br($profile->goals) ?>
                   </div>
                 </div>
               </div>
@@ -238,7 +238,7 @@ function add_announce()
       //Ajax Load data from ajax
       $.ajax({
 
-        url : "{{ url('admin/manageannouncements/detailAnnounce') }}/" + announce_id,
+        url : "<?= $this->url->get('admin/manageannouncements/detailAnnounce') ?>/" + announce_id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -269,12 +269,12 @@ function add_announce()
      var url;
      if(save_method == 'add')
      {
-      url = "{{ url('admin/manageannouncements/createannounce') }}";
+      url = "<?= $this->url->get('admin/manageannouncements/createannounce') ?>";
 
     }
     else
     {
-      url = "{{ url('admin/manageannouncements/editannounce') }}";
+      url = "<?= $this->url->get('admin/manageannouncements/editannounce') ?>";
     }
 
        // ajax adding data to database
@@ -315,7 +315,7 @@ function add_announce()
       {
 
        $.ajax({
-        url : "{{ url('admin/manageannouncements/deleteAnnounce') }}/" + announce_id,         
+        url : "<?= $this->url->get('admin/manageannouncements/deleteAnnounce') ?>/" + announce_id,         
         type: "POST",
         dataType: "JSON",
         success: function(data)
