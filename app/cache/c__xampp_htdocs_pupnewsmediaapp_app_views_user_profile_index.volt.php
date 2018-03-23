@@ -91,6 +91,7 @@
 
                           </div>
                           <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            
                             <button type="button" class="btn bg-light-blue waves-effect"><i class="material-icons">group</i>Followers</a></button>
 
                           </div>
@@ -133,6 +134,7 @@
                             <div class="form-group">
                               <div class="form-line">
                                <input type="text" class="form-control date" placeholder="Title" name = 'title'>
+                               <input type="hidden" class="form-control date"  name = 'profile_id' value=<?= $profile->profile_id ?>>
                              </div>
                            </div>
                          </div>
@@ -185,51 +187,67 @@
         </div>
       </form>
     </div>
+    <!-- end here -->
     <div role="tabpanel" class="tab-pane fade" id="createmagazine">
-     <div class="row clearfix">
-      <div class="row clearfix">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-          <div class="form-group">
-            <div class="form-line">
-              <input type="text" class="form-control date" placeholder="Title">
+      <form action="profile/createmagazines" method="POST" id="news"  enctype="multipart/form-data" >
+       <div class="row clearfix">
+        <div class="row clearfix">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="form-group">
+              <div class="form-line">
+                <input type="text" class="form-control date"  name ="title"placeholder="Title">
+                <input type="hidden" class="form-control date"  name = 'profile_id' value=<?= $profile->profile_id ?>>
+              </div>
             </div>
           </div>
+          <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
+            <label></label>
+          </div>
+          <div class="col-lg-1 col-md-3 col-sm-4 col-xs-2">
+           <label></label>
+         </div>
+       </div>
+
+
+       <div class="col-sm-12">
+         <div class="form-group">
+           <div class="form-line">
+             <textarea rows="10" class="form-control no-resize" placeholder="Please type what you want..." name="content"></textarea>
+           </div>
+         </div>
+       </div> 
+
+       <div class="row clearfix">
+
+        <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">                        
+          <select class="form-control show-tick" name = 'category'>
+            <?php foreach ($category as $categories) { ?>
+            <option value= <?= $categories->category_id ?> ><?= $categories->category_name ?></option>
+            <?php } ?>
+            <option vaue= 'none'><b>Select Category</b></option>
+          </select>
+
         </div>
-        <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
+        <div class="col-lg-3 col-md-10 col-sm-10 col-xs-9">                        
           <label></label>
         </div>
-        <div class="col-lg-1 col-md-3 col-sm-4 col-xs-2">
-         <label></label>
+        <div class="col-lg-2 col-md-10 col-sm-10 col-xs-9">
+          <div class="switch">
+           <label>Public<input type="checkbox" name='status' value="private"><span class="lever switch-col-red"></span>Private</label>
+         </div>
        </div>
-     </div>
-     <div class="row clearfix">
 
-      <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">                        
-        <select class="form-control show-tick">
-          <option><b>Select Category</b></option>
-          <option>Politics</option>
-          <option>Etertainment</option>
-          <option>Sports</option>
-        </select>
+       <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
+        <div class="form-group">
+          <button type="submit" class="btn bg-red btn-block btn-lg waves-effect">CREATE MAGAZINE</button>
 
-      </div>
-      <div class="col-lg-3 col-md-10 col-sm-10 col-xs-9">                        
-        <label></label>
-      </div>
-      <div class="col-lg-2 col-md-10 col-sm-10 col-xs-9">
-       <div class="switch">
-        <label>Public<input type="checkbox" checked=""><span class="lever switch-col-red"></span>Private</label>
-      </div>
-    </div>
-
-    <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
-      <div class="form-group">
-        <button type="button" class="btn bg-red btn-block btn-lg waves-effect">CREATE MAGAZINE</button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
+
+</form>
 </div>
 </div>
 </div>

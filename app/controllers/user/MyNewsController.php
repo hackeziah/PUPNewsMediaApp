@@ -8,9 +8,19 @@ use NewsApp\Models\Tblnews;
 
 class MyNewsController extends ControllerBase
 {
+
+
+
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authUser')){
+			$this->response->redirect('index');
+		}
+	}
+
 	public function indexAction()
 	{
-		//echo 'Student Page By Admin';
+		//echo 'Student Page By user';
 		// exit;
 		$id = $this->session->get('authUser');
 		$user_id = $id['id'];
@@ -45,7 +55,7 @@ class MyNewsController extends ControllerBase
 		}
 
 
-		$newsupdate->titile = $this->request->getPost('title');
+		$newsupdate->title = $this->request->getPost('title');
 		$newsupdate->content = $this->request->getPost('content');
 		$newsupdate->category = $this->request->getPost('category');	
 		$newsupdate->file = 'none.png';
@@ -68,6 +78,7 @@ class MyNewsController extends ControllerBase
 		}
 		
 	}
+	
 	public function deleteAction($news_id)
 	{
 		$news = Tblnews::findFirstByNews_id($news_id);

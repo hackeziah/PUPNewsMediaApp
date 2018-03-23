@@ -1,4 +1,6 @@
 
+
+<?= $this->getContent() ?>
 <html>
 
 <head>

@@ -5,33 +5,108 @@ use NewsApp\Models\Tblprofile;
 use NewsApp\Forms\ProfileForm;
 use NewsApp\Models\Tblcategory;
 use NewsApp\Models\Tblnews;
+use NewsApp\Models\Tblfollow;
+use NewsApp\Models\Tblmagazine;
+
 
 
 class ProfileController extends ControllerBase
 {
+
+
+	public function initialize() 
+	{
+
+		parent::initialize();
+	}
+	
 	public function indexAction()
 	{
 		$id = $this->session->get('authAdmin');
 		$user_id = $id['id'];
-			// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
-			// $stmt = $query->execute([
-			// 	'user_id'=>$user_id,
-			// ]);
 		$profile= Tblprofile::findFirstByUser_id($user_id);
 		$profileForm = new ProfileForm($profile);
 		$this->view->profileForm = $profileForm;
 		$this->view->profile = $profile;
-		$this->view->profile_id = $profile->profile_id;
 		$category = Tblcategory::find();
 		$this->view->category = $category;
+
+		// $query = $this->modelsManager->createQuery('SELECT COUNT follower  FROM NewsApp\Models\Tblfollow WHERE following =  :profile_id:');
+		// $stmt = $query->execute([
+		// 	'profile_id'=>$profile_id,
+		// ]);
+
+		// $this->view->followers = $stmt;
+
+		
 	}
+	
 	public function viewAction()
 	{
 		$id = $this->session->get('authAdmin');
 		$user_id = $id['id'];
+		$query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE user_id=:user_id:');
+		$stmt = $query->execute([
+			'user_id'=>$user_id,
+		]);
 		
-		
+		// var_dump($stmt);
 	}
+
+
+	public function seeAction($user_id){
+
+		// $id = $this->session->get('authAdmin');
+		// $user_id = $id['id'];
+		$profile= Tblprofile::findFirstByUser_id($user_id);
+		$profileForm = new ProfileForm($profile);
+		$this->view->profileForm = $profileForm;
+		$this->view->profile = $profile;	
+
+
+
+	}
+
+
+	public function followbyAction()
+	{
+
+
+		$follower = $this->request->getPost('follower');
+		$following = $this->request->getPost('following');
+
+		$ins = new Tblfollow();
+
+		$ins->follower 	= $follower;
+		$ins->following	= $following;
+		$ins->followed	= 1;
+
+		if($ins->save()==false){
+			foreach ($ins->getMessages() as $message) {
+				echo $message;
+			}
+		}else{
+			$this->response->redirect('admin/profile');
+		}
+
+
+
+		// if ($ins->save()) {
+		// 		// $this->session->set('message', 'New record has been added!');
+		// 	echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+
+		// }
+
+		// else{
+		// 	echo json_encode(["status" => 'error','message' => 'Error Here']);
+		// }
+
+		// return false;
+
+	}
+
+
+
 	public function updateAction()
 	{
 		if($this->request->getPost('profile_id')){
@@ -90,17 +165,19 @@ class ProfileController extends ControllerBase
 			$news->content = $this->request->getPost('content');
 			$news->category = $this->request->getPost('category');
 			$news->file = 'none';
-			$news->profile_id = $this->request->getPost('profile_id');
+			$news->profile_id = 3;
+			$news->status = 1;
+			$news->news_id = 1;
 			if( strlen($file->getName()) >= 1 ){
 				$news->file = $file->getName();
 			}
 
 			
-			if($this->request->getPost('status') == 'private' ){
-				$news->status = 0;
-			}else{
-				$news->status = 1;			
-			}
+			// if($this->request->getPost('status') == 'private' ){
+			// 	$news->status = 'PRIVATE';
+			// }else{
+
+
 			if($news->save()==false){
 				foreach ($news->getMessages() as $message) {
 					echo $message;
@@ -108,6 +185,52 @@ class ProfileController extends ControllerBase
 			}else{
 				$this->response->redirect('admin/profile');
 			}
+		}
+
+	}
+
+
+	public function createmagazineAction()
+	{
+		if(!$this->request->isPost()){
+			$this->response->redirect('admin/profile');
+		}
+
+		$magazine = new Tblmagazine();
+		$magazine->title = $this->request->getPost('title');
+		$magazine->category = $this->request->getPost('category');
+		$magazine->profile_id = $this->request->getPost('profile_id');
+		$magazine->content = $this->request->getPost('content');
+
+
+		// if (true == $this->request->hasFiles() && $this->request->isPost()) {
+		// 	$upload_dir = __DIR__ . '/../../../public/uploads/Cover/';
+
+		// 	if (!is_dir($upload_dir)) {
+		// 		mkdir($upload_dir, 0755);
+		// 	}
+		// 	foreach ($this->request->getUploadedFiles() as $file) {
+		// 		$file->moveTo($upload_dir . $file->getName());
+		// 		$this->flashSession->success($file->getName().' has been successfully uploaded.');
+		// 	}
+		// }
+		// if( strlen($file->getName()) >= 1 ){
+		// 	$news->file = $file->getName();
+		// }
+
+		if($this->request->getPost('status') == 'private' ){
+			$magazine->status = 0;
+		}else{
+			$magazine->status = 1;			
+		}
+
+
+		if($magazine->save()==false){
+			foreach ($magazine->getMessages() as $message) {
+				echo $message;
+			}
+		}else{
+			$this->response->redirect('admin/profile');
 		}
 
 	}

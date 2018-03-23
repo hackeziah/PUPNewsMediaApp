@@ -58,10 +58,10 @@ class IndexController extends Controller
 				$profile->lastname = $this->request->getPost('lastname');
 				$profile->email = $this->request->getPost('email');
 				$profile->user_id=$user->id;
-				$profile->birthdate = 'SET';
+				$profile->birthdate = '0000-00-00';
 				$profile->goals = 'SET';
 				$profile->about = 'SET';
-				$profile->profilepic = 'none';
+				$profile->profilepic = 'none.png';
 
 				if ($profile->save() == false) {
 					foreach ($profile->getMessages() as $message) {
@@ -71,21 +71,7 @@ class IndexController extends Controller
 					$this->response->redirect('index');
 				}
 			}
-
-
 		}
-
-		if($this->request->getPost('pass') != $this->request->getPost('confirm')){
-			$this->flash->error('Not same password!');
-			return $this->dispatcher->forward([
-				"controller" => "index",
-				"action" => "registration"
-			]);
-		}
-
-
-
-
 	}
 	public function forgotpassAction()
 	{

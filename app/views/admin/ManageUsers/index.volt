@@ -6,7 +6,7 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="block-header">
-			<h2>Manage Announcements</h2>
+			<h2>Manage Users</h2>
 		</div>
 		<!-- Input -->
 		<div class="row clearfix">
@@ -148,18 +148,6 @@ function add_announce()
 
      function deleteuser(id){
 
-      // swal({
-      //   title: "Are you sure?",
-      //   text: "Your will not be able to recover this imaginary file!",
-      //   type: "warning",
-      //   showCancelButton: true,
-      //   confirmButtonClass: "btn-danger",
-      //   confirmButtonText: "Yes, delete it!",
-      //   closeOnConfirm: false
-      // },
-      // function(){
-      //   swal("Deleted!", "Your imaginary file has been deleted.", "success");
-      // });
       if(confirm('Are you sure delete this data?'))
       {
 

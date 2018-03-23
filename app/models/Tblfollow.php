@@ -5,7 +5,7 @@ use Phalcon\Mvc\Model;
 date_default_timezone_set('Asia/Manila');
 class Tblfollow extends Model
 {
-	public $follow_id;
+	// public $follow_id;
 	public $follower;
 	public $following;
 	public $followed;
@@ -17,14 +17,14 @@ class Tblfollow extends Model
 		// $this->setWriteConnectionService("dbReplica");
 		// $this->setWriteConnectionService("db");
 		// map the relationship to category model
-        $this->belongsTo('follower', __NAMESPACE__ .'\User', 'id', 
-            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
-        );
+  //       $this->belongsTo('follower', __NAMESPACE__ .'\User', 'id', 
+  //           ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
+  //       );
 
-		// map the relationship to category model
-        $this->belongsTo('following', __NAMESPACE__ .'\User', 'id', 
-            ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
-        );
+		// // map the relationship to category model
+  //       $this->belongsTo('following', __NAMESPACE__ .'\User', 'id', 
+  //           ['foreignKey' => ['message' => 'The section does not exist'], 'alias' => 'id']
+  //       );
 
    
 
