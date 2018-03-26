@@ -20,8 +20,13 @@ class IndexController extends Controller
 		//added condition
 		if ($this->session->has('authAdmin')) {
 			$this->response->redirect('admin/home');
-		}elseif ($this->session->has('authUser')) {
+		}
+		if ($this->session->has('authUser')) {
 			$this->response->redirect('user/home');
+		}
+		
+		if($this->session->has('authStud')){
+			$this->response->redirect('student/home');
 		}
 	}
 
@@ -48,7 +53,7 @@ class IndexController extends Controller
 			$usr= new User();
 			$usr->username = $this->request->getPost('studentno');
 			$usr->password = $this->security->hash($this->request->getPost('pass'));
-			$usr->access = 'user';
+			$usr->access = 'student';
 			$username = $this->request->getPost('studentno');
 			if($usr->save()){
 				$user = User::findFirstByUsername($username);

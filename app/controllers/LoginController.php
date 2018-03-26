@@ -60,8 +60,13 @@ class LoginController extends Controller
 							//changed added condition
 							if ($user->access == 'admin'){
 							$this->session->set('authAdmin', $auth);
-							}else{
+							}
+							if ($user->access == 'user'){
 								$this->session->set('authUser', $auth);
+							}	
+							if ($user->access == 'student'){
+								$this->session->set('authStud', $auth);
+						
 							}
 
 							// $this->response->redirect('dashboard');

@@ -3,24 +3,24 @@
     <!-- Left Sidebar -->
     <aside id="leftsidebar" class="sidebar">
         <!-- User Info -->
-      <div class="user-info">
-                <div class="image">
-                    {{ image("uploads/userss/"~prof.profilepic,'width' : '60', 'heigth' : '60') }}
-                </div>
-                <div class="info-container">
-                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{prof.firstname}}&nbsp;{{ prof.middlename }}&nbsp;{{ prof.lastname }}</div>
-                    <div class="email">{{prof.email}}</div>
-                    <div class="btn-group user-helper-dropdown">
-                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="{{ url("admin/profile")}}"><i class="material-icons">person</i>Profile</a></li>
-                            <li role="seperator" class="divider"></li>
-                            <li><a href="{{ url("logout")}}"><i class="material-icons">input</i>Sign Out</a></li>
-                            
-                        </ul>
-                    </div>
+        <div class="user-info">
+            <div class="image">
+                {{ image("uploads/userss/"~prof.profilepic,'width' : '60', 'heigth' : '60') }}
+            </div>
+            <div class="info-container">
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{prof.firstname}}&nbsp;{{ prof.middlename }}&nbsp;{{ prof.lastname }}</div>
+                <div class="email">{{prof.email}}</div>
+                <div class="btn-group user-helper-dropdown">
+                    <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="{{ url("admin/profile")}}"><i class="material-icons">person</i>Profile</a></li>
+                        <li role="seperator" class="divider"></li>
+                        <li><a href="{{ url("logout")}}"><i class="material-icons">input</i>Sign Out</a></li>
+                        
+                    </ul>
                 </div>
             </div>
+        </div>
         <!-- #admin Info -->
         <!-- Menu -->
         <div class="menu">
@@ -58,6 +58,11 @@
                         </li>
                         <li>
                             <a href="{{ url("admin/ManageNews")}}">Manage News</a>
+                            
+                        </li>
+                        <li>
+                            <a href="{{ url("admin/MyContentMagazine")}}">Manage Content Magazine</a>
+                            
                         </li>
                         <li>
                             <a href="{{ url("admin/ManageCategory")}}">Manage Category</a>
@@ -88,6 +93,14 @@
 
                         <i class="material-icons">assignment</i>
                         <span>My Magazines</span>
+                    </a>
+                </li>
+
+                <li class="active">
+                    <a href="{{ url("admin/MyContentMagazine")}}">
+
+                        <i class="material-icons">assignment</i>
+                        <span>Manage Content Magazine</span>
                     </a>
                 </li>
 

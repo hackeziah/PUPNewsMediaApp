@@ -92,6 +92,28 @@ $router->add('/user', [
 
 //User Router
 
+
+
+//Student Router
+$router->add('/student/:controller/:action/:params', [
+   'namespace' => 'NewsApp\Controllers\Student',
+   'controller' => 1,
+   'action' => 2,
+   'params' => 3,
+]);
+
+$router->add('/student/:controller', [
+   'namespace' => 'NewsApp\Controllers\Student',
+   'controller' => 1
+]);
+
+$router->add('/student', [
+   'namespace' => 'NewsApp\Controllers\Student',
+   'controller' => 'index'
+]);
+
+//Student Router
+
 $router->removeExtraSlashes(true);
 
 

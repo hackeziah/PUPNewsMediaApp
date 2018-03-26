@@ -15,7 +15,7 @@ class ProfileForm extends Form {
 
 	public function initialize ($entity = null)
 	{
-		$profile_id = new Text('profile_id');
+		$profile_id = new Hidden('profile_id');
 		$this->add($profile_id);
 
 		$lastname = new Text("lastname");

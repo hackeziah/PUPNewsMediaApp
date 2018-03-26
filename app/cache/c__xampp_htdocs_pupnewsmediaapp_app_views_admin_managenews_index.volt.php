@@ -15,8 +15,10 @@
 			<table class="table table-hover">
 				<tr>
 					<th>PROFILE ID</th>
-					<th>Profile Name</th>
+					<th>PUBLISHER</th>
 					<th>TITLE</th>
+          <th>DATE & TIME</th>
+
 				</tr>
 
 
@@ -25,6 +27,8 @@
 					<td><?= $data->profile->profile_id ?></td>
 					<td><?= ucwords($this->escaper->escapeHtml($data->profile->firstname)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->middlename)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->lastname)) ?></td>
 					<td><?= $data->title ?></td>
+          <td><?= $data->timestamp ?></td>
+
 				
 
 
@@ -89,7 +93,7 @@ function add_announce()
       //Ajax Load data from ajax
       $.ajax({
 
-      	url : "<?= $this->url->get('admin/manageusers/shownews') ?>/" + id,
+      	url : "<?= $this->url->get('admin/managenews/shownews') ?>/" + id,
       	type: "GET",
       	dataType: "JSON",
       	success: function(data)
@@ -97,16 +101,16 @@ function add_announce()
 
 
 
-          $('[name="news_d"]').val(data.news_d);
+          $('[name="news_d"]').val(data.news_id);
           $('[name="profile_id"]').val(data.profile_id);
           $('[name="title"]').val(data.title);
-          $('[name="file"]').val(data.file);
+          $('[name="content"]').val(data.content);
           $('[name="file"]').val(data.file);                    
-          $('[value="timestamp"]').val(data.timestamp);
+          // $('[value="timestamp"]').val(data.timestamp);
 
           
               $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-              $('.modal-title').text('Edit Announcement'); // Set title to Bootstrap modal title
+              $('.modal-title').text('SHOW NEWS'); // Set title to Bootstrap modal title
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -121,12 +125,12 @@ function add_announce()
      var url;
      if(save_method == 'add')
      {
-      url = "<?= $this->url->get('admin/manageusers/createannounce') ?>";
+      url = "<?= $this->url->get('admin/managenews/createannounce') ?>";
 
     }
     else
     {
-      url = "<?= $this->url->get('admin/manageusers/editannounce') ?>";
+      url = "<?= $this->url->get('admin/managenews/editannounce') ?>";
     }
 
        // ajax adding data to database
@@ -178,24 +182,26 @@ function add_announce()
    </script>
 
 
+
+
    <div class="modal fade" id="modal_form" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
      <div class="modal-content">
       <div class="modal-header">
-       <h4 class="modal-title" id="defaultModalLabel">Add User</h4>
+       <h4 class="modal-title" id="defaultModalLabel"></h4>
      </div>
      <div class="modal-body">
        <form action="#" id="form" class="form-horizontal">
        	 <input type="hidden" value="" name="id"/>
         <div class="form-body">
 
-         <input name="news_d" class="form-control" type="hidden">
-         <input name="profile" value="<?= $profile->user_id ?>" class="form-control" type="hidden">
+         <input name="news_id" class="form-control" type="hidden">
+         <input name="profile_id" value="<?= $profile->user_id ?>" class="form-control" type="hidden"disabled="true">
          <div class="form-group">
           <label class="control-label col-md-3">Title</label>
           <div class="col-md-9">
             <div class="form-line">
-             <input name="title" placeholder="Title" class="form-control" type="text">
+             <input name="title" placeholder="Title" class="form-control" type="text"disabled="true">
            </div>
          </div>
        </div>
@@ -205,7 +211,7 @@ function add_announce()
         <div class="col-md-9">
 
          <div class="form-line">
-          <textarea  name="file" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+          <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..." disabled="true"></textarea>
         </div>
       </div>
     </div>
@@ -215,7 +221,7 @@ function add_announce()
 </form>
 </div>
 <div class="modal-footer">
- <button type="button" id ="btnSave" onclick="save()"class="btn btn-link waves-effect">SAVE</button>
+ <!-- <button type="button" id ="btnSave" onclick="save()"class="btn btn-link waves-effect">SAVE</button> -->
  <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
 </div>
 </div>

@@ -183,7 +183,6 @@ function add_cat()
 
 
 
-        {{ profileForm.render('profile_id', ['class' : 'form-control' ])}} 
 
 
          <div class="form-group">

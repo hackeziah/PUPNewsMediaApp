@@ -17,7 +17,7 @@
 					<th>ID</th>
 					<th>username</th>
 
-					<th>Profile Name</th>
+					<th>USER LEVEL</th>
 					<!-- <th>Date and Time</th> -->
 				</tr>
 
@@ -26,28 +26,35 @@
 				<tr>
 					<td><?= $data->id ?></td>
 					<td><?= $data->username ?></td>
-					<td><?= ucwords($this->escaper->escapeHtml($data->profile->firstname)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->middlename)) ?> <?= ucwords($this->escaper->escapeHtml($data->profile->lastname)) ?></td>
+
 					<td><?= ucwords($this->escaper->escapeHtml($data->access)) ?></td>
 					<td>
-						<button class="btn btn-danger" onclick="detailUsers(<?= $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button>
-						<button class="btn btn-danger" onclick="deleteuser(<?= $data->id ?>)"><i class="glyphicon glyphicon-remove"></i></button>
-					</td>
-				</tr>
-
-				<?php } ?>
+						<button class="btn btn-danger"  onclick="detailuser(<?= $data->id ?>)"><i class="glyphicon glyphicon-pencil"></i></button>
+            <!-- <button class="btn btn-danger" onclick="deleteuser(<?= $data->id ?>)"><i class="glyphicon glyphicon-remove"></i></button> -->
 
 
 
 
-			</table>
-			<ul class="pagination pull-right">
-				<li><?= $this->tag->linkTo(['admin/manageusers', 'First']) ?></li>
-				<li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->before, 'Previous']) ?></li>
-				<li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->next, 'Next']) ?></li>
-				<li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->last, 'Last']) ?></li>
-			</ul>
-		</div>
-	</div>
+
+
+            <button class="btn btn-danger" onclick="deleteuser(<?= $data->id ?>)"><i class="glyphicon glyphicon-remove"></i></button>
+          </td>
+        </tr>
+
+        <?php } ?>
+
+
+
+
+      </table>
+      <ul class="pagination pull-right">
+        <li><?= $this->tag->linkTo(['admin/manageusers', 'First']) ?></li>
+        <li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->before, 'Previous']) ?></li>
+        <li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->next, 'Next']) ?></li>
+        <li><?= $this->tag->linkTo(['admin/manageusers?page=' . $users->last, 'Last']) ?></li>
+      </ul>
+    </div>
+  </div>
 </div>
 </section> 
 <?= $this->tag->javascriptInclude('plugins/jquery/jquery.min.js') ?>
@@ -63,6 +70,7 @@
 <?= $this->tag->javascriptInclude('js/demo.js') ?>
 
 
+
 <script type="text/javascript">
 var save_method;
 var table;
@@ -73,13 +81,13 @@ function add_announce()
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
     //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
-      $('.modal-title').text('Add Announcement'); // Set title to Bootstrap modal title
+      // $('.modal-title').text('Add Announcement'); // Set title to Bootstrap modal title
 
     }
 
 
 
-    function detailAnnounce(announce_id)
+    function detailuser(id)
     {
      save_method = 'edit';
       $('#form')[0].reset(); // reset form on modals
@@ -87,7 +95,7 @@ function add_announce()
       //Ajax Load data from ajax
       $.ajax({
 
-      	url : "<?= $this->url->get('admin/manageusers/detailAnnounce') ?>/" + announce_id,
+      	url : "<?= $this->url->get('admin/manageusers/detailuser') ?>/" + id,
       	type: "GET",
       	dataType: "JSON",
       	success: function(data)
@@ -95,15 +103,14 @@ function add_announce()
 
 
 
-          $('[name="announce_id"]').val(data.announce_id);
-          $('[name="profile_id"]').val(data.profile_id);
-          $('[name="title"]').val(data.title);
-          $('[name="content"]').val(data.content);
-          $('[value="timestamp"]').val(data.timestamp);
+          $('[name="id"]').val(data.id);
+          $('[name="username"]').val(data.username);
+          $('[name="access"]').val(data.access);
+
 
           
               $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-              $('.modal-title').text('Edit Announcement'); // Set title to Bootstrap modal title
+              // $('.modal-title').text('CHANGE'); // Set title to Bootstrap modal title
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -116,15 +123,8 @@ function add_announce()
     function save()
     {
      var url;
-     if(save_method == 'add')
-     {
-      url = "<?= $this->url->get('admin/manageusers/createannounce') ?>";
 
-    }
-    else
-    {
-      url = "<?= $this->url->get('admin/manageusers/editannounce') ?>";
-    }
+      url = "<?= $this->url->get('admin/manageusers/editusers') ?>";
 
        // ajax adding data to database
        $.ajax({
@@ -174,47 +174,56 @@ function add_announce()
    </script>
 
 
-   <div class="modal fade" id="modal_form" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-     <div class="modal-content">
-      <div class="modal-header">
-       <h4 class="modal-title" id="defaultModalLabel">Add User</h4>
-     </div>
-     <div class="modal-body">
-       <form action="#" id="form" class="form-horizontal">
-       	 <input type="hidden" value="" name="id"/>
-        <div class="form-body">
 
-         <input name="announce_id" class="form-control" type="hidden">
-         <input name="profile" value="<?= $profile->user_id ?>" class="form-control" type="hidden">
-         <div class="form-group">
-          <label class="control-label col-md-3">Title</label>
-          <div class="col-md-9">
-            <div class="form-line">
-             <input name="title" placeholder="Title" class="form-control" type="text">
-           </div>
-         </div>
-       </div>
 
-       <div class="form-group">
-        <label class="control-label col-md-3">Content</label>
-        <div class="col-md-9">
 
-         <div class="form-line">
-          <textarea  name="content" rows="5" class="form-control no-resize" placeholder="Please type what you want..."></textarea>
+<div class="modal fade" id="modal_form" tabindex="-1" role="dialog">
+ <div class="modal-dialog">
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">CHOOSE ACCESS LEVEL</h4>
+    </div>
+    <form action="#" id="form" class="form-horizontal">
+      <div class="modal-body">
+       <select class="form-control show-tick"  name="access" value= <?= $data->access ?>>
+
+        <option value= "admin">Admin</option>
+        <option value= "student">Student</option>
+        <option value= "user">Journalist</option>
+      </select>
+
+      <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         </div>
       </div>
+      <div class="row clearfix">
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+          <input type="hidden" name="id" value= <?= $data->id ?>> 
+
+        </div>
+
+        <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
+          <input type="button" value ="CHANGE"id ="btnSave" onclick="save()"class="btn bg-red btn-block btn-sm waves-effect">
+
+        
+        </div>
+
+        <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+        </div>
+      </div>
+
+
     </div>
 
+  </form>
 
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
   </div>
-</form>
 </div>
-<div class="modal-footer">
- <button type="button" id ="btnSave" onclick="save()"class="btn btn-link waves-effect">SAVE</button>
- <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-</div>
-</div>
+
 </div>
 </div>
 

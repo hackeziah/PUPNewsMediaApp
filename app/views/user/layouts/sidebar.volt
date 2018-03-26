@@ -51,6 +51,13 @@
                         <span>My Magazines</span>
                     </a>
                 </li>
+                <li class="active">
+                    <a href="{{ url("user/MyContentMagazine")}}">
+
+                        <i class="material-icons">assignment</i>
+                        <span>My Content Magazine</span>
+                    </a>
+                </li>
 
 
 

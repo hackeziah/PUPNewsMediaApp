@@ -4,15 +4,25 @@ namespace NewsApp\Controllers\User;
 use NewsApp\Models\Tblcategory;
 use NewsApp\Models\Tblnews;
 use NewsApp\Models\Tblmagazine;
+use NewsApp\Models\Tblmagazinenews;
+use NewsApp\Models\Tblprofile;
+
 class HomeController extends ControllerBase
 {
+	public function beforeExecuteRoute()
+	{
+		if(!$this->session->has('authUser')){
+			$this->response->redirect('index');
+		}
+	}
+
 	public function indexAction()
 	{
 		$id = $this->session->get('authUser');
 		$user_id = $id['id'];
-		//echo 'Student Page By User';
-		// exit;
-
+		$profile = Tblprofile::findFirstByUser_id($user_id);
+		$magazines =Tblmagazine::findByProfile_id($profile->profile_id);
+		$this->view->magazines = $magazines;  
 		$category = Tblcategory::find();
 		$this->view->category = $category;
 		$query = $this->modelsManager->createQuery('SELECT * FROM NewsApp\Models\Tblnews  WHERE status=1 ORDER BY timestamp DESC');
@@ -77,22 +87,6 @@ class HomeController extends ControllerBase
 		$magazine->profile_id = $this->request->getPost('profile_id');
 		$magazine->content = $this->request->getPost('content');
 
-
-		// if (true == $this->request->hasFiles() && $this->request->isPost()) {
-		// 	$upload_dir = __DIR__ . '/../../../public/uploads/Cover/';
-
-		// 	if (!is_dir($upload_dir)) {
-		// 		mkdir($upload_dir, 0755);
-		// 	}
-		// 	foreach ($this->request->getUploadedFiles() as $file) {
-		// 		$file->moveTo($upload_dir . $file->getName());
-		// 		$this->flashSession->success($file->getName().' has been successfully uploaded.');
-		// 	}
-		// }
-		// if( strlen($file->getName()) >= 1 ){
-		// 	$news->file = $file->getName();
-		// }
-
 		if($this->request->getPost('status') == 'private' ){
 			$magazine->status = 0;
 		}else{
@@ -108,6 +102,52 @@ class HomeController extends ControllerBase
 			$this->response->redirect('user/home');
 		}
 
+	}
+	// public function addcontentAction()
+	// {
+	// 	if(!$this->request->isPost()){
+	// 		$this->response->redirect('user/home');
+	// 	}
+
+
+	// 	$magazine_id = $this->request->getPost('magazine_id');
+	// 	$news_id = $this->request->getPost('news_id');
+
+	// 	$ins = new Tblmagazinenews();
+	// 	$ins->magazine_id = $magazine_id;
+	// 	$ins->news_id = $news_id;
+	// 	$ins->status = 1;
+
+	// 	if($ins->save()==false){
+	// 		foreach ($ins->getMessages() as $message) {
+	// 			echo $message;
+	// 		}
+	// 	}else{
+	// 		$this->response->redirect('user/home');
+	// 	}
+	// }
+
+
+
+	public function addcontentAction()
+	{
+		if(!$this->request->isPost()){
+			$this->response->redirect('user/home');
+		}
+		$magazineContent = new Tblmagazinenews();
+		$magazineContent->magazine_id = $this->request->getPost('magazine_id');
+		$magazineContent->news_id = $this->request->getPost('news_id');
+		$magazineContent->profile_id = $this->request->getPost('profile_id');
+
+		$magazineContent->status = 1;
+
+		if($magazineContent->save()==false){
+			foreach ($magazineContent->getMessages() as $message) {
+				echo $message;
+			}
+		}else{
+			$this->response->redirect('user/home');
+		}
 	}
 	
 }

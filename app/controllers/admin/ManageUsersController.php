@@ -147,27 +147,121 @@ class ManageUsersController extends ControllerBase
 
 	// }
 
+
+
 	
-	// public function detailAnnounceAction($id)
+	public function detailuserAction($id)
+	{
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('admin/manageusers');
+		}
+
+		$id = $this->filter->sanitize($id, 'int');
+
+		$users = User::findFirst($id);
+		echo json_encode($users);
+
+		if (!$users) {
+			// pag walang ganun
+			$this->response->redirect('admin/manageusers');
+		}
+
+		return false;
+
+
+	}
+
+
+	
+	public function editusersAction()
+	{
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('admin/manageusers');
+		}
+				// $category_id = $this->filter->sanitize('category_id', 'int');
+		$id = $this->request->getPost('id', 'int');
+		
+		
+		$ins = User::findFirst($id);
+
+		if (!$ins) {
+						// pag walang ganun ma record
+			$this->response->redirect('admin/manageusers');
+		}
+
+		
+		$ins->access= $this->request->getPost('access');
+		$ins->id= $this->request->getPost('id');
+
+		
+		if ($ins->save()) {
+			
+			
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+			
+		}
+
+		else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
+
+		return false;
+	}
+
+
+	// public function detailuserAction($id)
 	// {
-	// 	if (!$this->request->isPost() && !$this->request->isAjax()) {
-	// 		return $this->response->redirect('admin/manageusers');
-	// 	}
-
+	// 	// display student detail here
 	// 	$id = $this->filter->sanitize($id, 'int');
-
-	// 	$users = User::findFirst($id);
-	// 	echo json_encode($users);
-
-	// 	if (!$users) {
+		
+	// 	$userss = User::findFirst($id);
+		
+	// 	if (!$$userss) {
 	// 		// pag walang ganun
-	// 		$this->response->redirect('admin/manageusers');
+	// 		$this->response->redirect('');
 	// 	}
 
-	// 	return false;
+	// 	$this->view->$userss = $userss;
+	// } 
+
+	public function editannounceAction()
+	{
+		// check if post request if not redire
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('admin/manageannouncements');
+		}
+		$announce_id = $this->request->getPost('announce_id');
+		
+
+		$ins = Tblannouncements::findFirst($announce_id);
+
+		if (!$ins) {
+			// pag walang ganun ma record
+			$this->response->redirect('admin/manageannouncements');
+		}
 
 
-	// }
+		$profile = $this->request->getPost('profile');
+		$title = $this->request->getPost('title');
+		$content = $this->request->getPost('content');
+
+
+		$ins->profile_id 	= $profile;
+		$ins->title	=  $title;
+		$ins->content	=  $content;
+
+		if ($ins->save()) {
+
+			echo json_encode(["status" => 'ok','message' => 'Okay Here']);
+
+		}
+
+		else {
+			echo json_encode(["status" => 'error','message' => 'Error Here']);
+		}
+
+		return false;
+	}
 
 	// public function editannounceAction()
 	// {
@@ -215,17 +309,19 @@ class ManageUsersController extends ControllerBase
 			return $this->response->redirect('admin/manageusers');
 		}
 
-		$user_id = $this->filter->sanitize($id, 'int');
+		$id = $this->filter->sanitize($id, 'int');
 
 
-		$query = $this->modelsManager->createQuery('DELETE FROM User, Tblprofile WHERE User.id = Tblprofile.user_id AND User.id=:user_id:');
-		$del = $query->execute([
-			'user_id'=>$user_id,
-		]);
-		// DELETE T1, T2
-		// FROM T1
-		// INNER JOIN T2 ON T1.key = T2.key
-		// WHERE condition;
+		// $query = $this->modelsManager->createQuery('DELETE FROM User, Tblprofile WHERE User.id = Tblprofile.user_id AND User.id=:user_id:');
+		// $del = $query->execute([
+		// 	'user_id'=>$user_id,
+		// ]);
+		// // DELETE T1, T2
+		// // FROM T1
+		// // INNER JOIN T2 ON T1.key = T2.key
+		// // WHERE condition;
+
+		$del = User::findFirstById($id);
 
 		if (!$del) {
 					// pag walang ganun

@@ -3,7 +3,7 @@
 namespace NewsApp\Models;
 
 use Phalcon\Mvc\Model;
-date_default_timezone_set('Asia/Manila');
+// date_default_timezone_set('Asia/Manila');
 
 class Tblannouncements extends Model
 {
@@ -28,15 +28,15 @@ class Tblannouncements extends Model
 
 	}
 
-	public function beforeValidationOnSave()
-	{
+	// public function beforeValidationOnSave()
+	// {
 		
-		$today = time();
-		$now =date("d-m-Y g:i:s ", $today);
-		$this->timestamp = $now ;
-		$this->timestamp = new \Phalcon\Db\RawValue­('FROM_UNIXTIME(1500­000000)'); 
+	// 	$today = time();
+	// 	$now =date("d-m-Y g:i:s ", $today);
+	// 	$this->timestamp = $now ;
+	// 	$this->timestamp = new \Phalcon\Db\RawValue­('FROM_UNIXTIME(1500­000000)'); 
 
-	}
+	// }
 
 	// public function beforeValidationOnupdate()
 	// {

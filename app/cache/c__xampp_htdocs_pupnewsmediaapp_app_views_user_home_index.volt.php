@@ -93,242 +93,292 @@
 
 
 
-    <div role="tabpanel" class="tab-pane fade" id="createmagazine">
-      <form action="home/createmagazines" method="POST" id="news"  enctype="multipart/form-data" >
-       <div class="row clearfix">
-        <div class="row clearfix">
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-            <div class="form-group">
-              <div class="form-line">
-                <input type="text" class="form-control date"  name ="title"placeholder="Title">
-                <input type="hidden" class="form-control date"  name = 'profile_id' value=<?= $prof->profile_id ?>>
+                        <div role="tabpanel" class="tab-pane fade" id="createmagazine">
+                          <form action="home/createmagazines" method="POST" id="news"  enctype="multipart/form-data" >
+                           <div class="row clearfix">
+                            <div class="row clearfix">
+                              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group">
+                                  <div class="form-line">
+                                    <input type="text" class="form-control date"  name ="title"placeholder="Title">
+                                    <input type="hidden" class="form-control date"  name = 'profile_id' value=<?= $prof->profile_id ?>>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
+                                <label></label>
+                              </div>
+                              <div class="col-lg-1 col-md-3 col-sm-4 col-xs-2">
+                               <label></label>
+                             </div>
+                           </div>
+
+
+                           <div class="col-sm-12">
+                             <div class="form-group">
+                               <div class="form-line">
+                                 <textarea rows="10" class="form-control no-resize" placeholder="Please type what you want..." name="content"></textarea>
+                               </div>
+                             </div>
+                           </div> 
+
+                           <div class="row clearfix">
+
+                            <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">                        
+                              <select class="form-control show-tick" name = 'category'>
+                                <?php foreach ($category as $categories) { ?>
+                                <option value= <?= $categories->category_id ?> ><?= $categories->category_name ?></option>
+                                <?php } ?>
+                                <option vaue= 'none'><b>Select Category</b></option>
+                              </select>
+
+                            </div>
+                            <div class="col-lg-3 col-md-10 col-sm-10 col-xs-9">                        
+                              <label></label>
+                            </div>
+                            <div class="col-lg-2 col-md-10 col-sm-10 col-xs-9">
+                              <div class="switch">
+                               <label>Public<input type="checkbox" name='status' value="private"><span class="lever switch-col-red"></span>Private</label>
+                             </div>
+                           </div>
+
+                           <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
+                            <div class="form-group">
+                              <button type="submit" class="btn bg-red btn-block btn-lg waves-effect">CREATE MAGAZINE</button>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </form>
+
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-5 col-md-3 col-sm-2 col-xs-1">
-            <label></label>
-          </div>
-          <div class="col-lg-1 col-md-3 col-sm-4 col-xs-2">
-           <label></label>
-         </div>
-       </div>
+
+            <?php foreach ($news as $newsinfo) { ?>
+
+            <div class="card">
+              <div class="header bg-red">
+                <h2> <b><?= $newsinfo->title ?></b> By: <?= $newsinfo->profile->firstname ?> <?= $newsinfo->profile->middlename ?> <?= $newsinfo->profile->lastname ?><small>-Journalist </small><small><?= $newsinfo->timestamp ?></small></h2>                                      
+              </div>
+
+              <div class="body">
+                <div class="row clearfix">
+                  <div class="row clearfix">
+                    <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">
+                      <div class="form-group">
+                        <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?>
+                      </div>
+                    </div>
+                    <div class="col-lg-8 col-md-10 col-sm-10 col-xs-9">
+                      <div class="form-group">
+
+                        <div class="card">
+                          <div class="header bg-red">
+                            Category:<?= $newsinfo->categories->category_name ?>
+                          </div>
+                          <div class="body">
+                            <?= $newsinfo->content ?>
+                          </div>
+
+                        </div><!--card-->
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row clearfix">
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
+
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+                      <!-- <button type="button"class="btn bg-red btn-block btn-sm waves-effect"><i class="material-icons">report</i>REPORT</a></button> -->
+                    </div>
+                  </div>
+                  <div class="row clearfix">
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                    <button  data-toggle="modal" data-target="#magazine<?= $newsinfo->news_id ?>" type="button"class="btn bg-red btn-block btn-sm waves-effect"><i class="material-icons">add_box</i>ADD TO MY MAGAZINE</a></button>
 
 
-       <div class="col-sm-12">
-         <div class="form-group">
-           <div class="form-line">
-             <textarea rows="10" class="form-control no-resize" placeholder="Please type what you want..." name="content"></textarea>
-           </div>
-         </div>
-       </div> 
+                     <div class="modal fade" id="magazine<?= $newsinfo->news_id ?>" role="dialog">
+                      <div class="modal-dialog">
 
-       <div class="row clearfix">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">CHOOSE MAGAZINE</h4>
+                          </div>
 
-        <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">                        
-          <select class="form-control show-tick" name = 'category'>
-            <?php foreach ($category as $categories) { ?>
-            <option value= <?= $categories->category_id ?> ><?= $categories->category_name ?></option>
-            <?php } ?>
-            <option vaue= 'none'><b>Select Category</b></option>
-          </select>
+                          <?= $this->tag->form(['admin/home/addcontent', 'method' => 'post']) ?>
+                          <div class="modal-body">
+
+                           <select class="form-control show-tick" name = 'magazine_id'>
+                            <?php foreach ($magazines as $magazine) { ?>
+                            <option value= <?= $magazine->magazine_id ?>> <?= $magazine->title ?></option>
+                            <?php } ?>
+                          </select>
+                          
+                          <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            </div>
+                          </div>
+                          <div class="row clearfix">
+                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                              <input type="hidden" name="news_id" value= <?= $newsinfo->news_id ?>> 
+                            <input type="hidden" class="form-control date" name = 'profile_id' value=<?= $prof->profile_id ?>>
+                              
+                            </div>
+
+                            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6">
+                              <input type="submit" value="ADD" class="btn bg-red btn-block btn-sm waves-effect">
+                            </div>
+
+                            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3">
+                            </div>
+                          </div>
+                          
+
+                        </div>
+                        <?= $this->tag->endForm() ?>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div><!--card-->
+
+          <?php } ?>
 
         </div>
-        <div class="col-lg-3 col-md-10 col-sm-10 col-xs-9">                        
-          <label></label>
-        </div>
-        <div class="col-lg-2 col-md-10 col-sm-10 col-xs-9">
-          <div class="switch">
-           <label>Public<input type="checkbox" name='status' value="private"><span class="lever switch-col-red"></span>Private</label>
-         </div>
-       </div>
+      </div><!--card-->
 
-       <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
-        <div class="form-group">
-          <button type="submit" class="btn bg-red btn-block btn-lg waves-effect">CREATE MAGAZINE</button>
+
+    </div>
+
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <div class="card">
+        <div class="header bg-red">
+          <h2>Updated News <small>Recent News</small></h2>
+        </div>
+        <?php foreach ($news as $newsinfo) { ?>
+        <div class="body">
+          <div class="bs-example" data-example-id="media-alignment">
+
+            <div class="media">
+              <div class="media-left media-bottom">
+                <a href="javascript:void(0);">     
+                  <!-- <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?> -->
+                </a>
+              </div>
+              <div class="media-body">
+               <a href = '#' data-toggle="modal" data-target="#<?= $newsinfo->news_id ?>"  >
+                <h4 class="media-heading"><?= $newsinfo->title ?></h4><h5><b>By:</b> <?= $newsinfo->profile->firstname ?>&nbsp;<?= $newsinfo->profile->middlename ?>&nbsp;<?= $newsinfo->profile->lastname ?>  <small>(<?= $newsinfo->timestamp ?>)</small>  </h5> 
+
+
+              </a>
+            </div>
+          </div>
+
+
 
         </div>
       </div>
-    </div>
-  </div>
-</div>
 
-</form>
+      <div class="modal fade" id="<?= $newsinfo->news_id ?>" role="dialog">
+        <div class="modal-dialog">
 
-                      </div>
-                    </div>
-                  </div>
-
-                  <?php foreach ($news as $newsinfo) { ?>
-                  
-                  <div class="card">
-                    <div class="header bg-red">
-                      <h2> <b><?= $newsinfo->title ?></b> By: <?= $newsinfo->profile->firstname ?> <?= $newsinfo->profile->middlename ?> <?= $newsinfo->profile->lastname ?><small>-Journalist </small><small><?= $newsinfo->timestamp ?></small></h2>                                      
-                    </div>
-
-                    <div class="body">
-                      <div class="row clearfix">
-                        <div class="row clearfix">
-                          <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">
-                            <div class="form-group">
-                              <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?>
-                            </div>
-                          </div>
-                          <div class="col-lg-8 col-md-10 col-sm-10 col-xs-9">
-                            <div class="form-group">
-
-                              <div class="card">
-                                <div class="header bg-red">
-                                  Category:<?= $newsinfo->categories->category_name ?>
-                                </div>
-                                <div class="body">
-                                  <?= $newsinfo->content ?>
-                                </div>
-
-                              </div><!--card-->
-
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row clearfix">
-                          <div class="col-lg-10 col-md-10 col-sm-8 col-xs-6">
-
-                          </div>
-                          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-                            <button type="button"class="btn bg-red btn-block btn-sm waves-effect"><i class="material-icons">report</i>REPORT</a></button>
-                          </div>
-                        </div>
-                        <div class="row clearfix">
-                          <div class="col-lg-9 col-md-9 col-sm-8 col-xs-6">
-
-                          </div>
-                          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                            <button onclick="newsadd(<?= $newsinfo->news_id ?>)" type="button"class="btn bg-red btn-block btn-sm waves-effect"><i class="material-icons">add_box</i>ADD TO MY MAGAZINE</a></button>
-                          </div>
-                        </div>
-
-                      </div>
-                    </div>
-
-                  </div><!--card-->
-
-                  <?php } ?>
-
-                </div>
-              </div><!--card-->
-
-
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"><?= $newsinfo->timestamp ?></u></h4>
             </div>
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="modal-body">
               <div class="card">
                 <div class="header bg-red">
-                  <h2>Updated News <small>Recent News</small></h2>
+                  <h2> <b><?= $newsinfo->title ?></b> By: <?= $newsinfo->profile->firstname ?> <?= $newsinfo->profile->middlename ?> <?= $newsinfo->profile->lastname ?><small>-Journalist </small><small><?= $newsinfo->timestamp ?></small></h2>                                      
                 </div>
-                <?php foreach ($news as $newsinfo) { ?>
+
                 <div class="body">
-                  <div class="bs-example" data-example-id="media-alignment">
-
-                    <div class="media">
-                      <div class="media-left media-bottom">
-                        <a href="javascript:void(0);">     
-                          <!-- <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?> -->
-                        </a>
-                      </div>
-                      <div class="media-body">
-                       <a href = '#' data-toggle="modal" data-target="#<?= $newsinfo->news_id ?>"  >
-                        <h4 class="media-heading"><?= $newsinfo->title ?></h4><h5><b>By:</b> <?= $newsinfo->profile->firstname ?>&nbsp;<?= $newsinfo->profile->middlename ?>&nbsp;<?= $newsinfo->profile->lastname ?>  <small>(<?= $newsinfo->timestamp ?>)</small>  </h5> 
-
-
-                      </a>
-                    </div>
-                  </div>
-
-
-
-                </div>
-              </div>
-
-              <div class="modal fade" id="<?= $newsinfo->news_id ?>" role="dialog">
-                <div class="modal-dialog">
-
-                  <!-- Modal content-->
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal">&times;</button>
-                      <h4 class="modal-title"><?= $newsinfo->timestamp ?></u></h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="card">
-                        <div class="header bg-red">
-                          <h2> <b><?= $newsinfo->title ?></b> By: <?= $newsinfo->profile->firstname ?> <?= $newsinfo->profile->middlename ?> <?= $newsinfo->profile->lastname ?><small>-Journalist </small><small><?= $newsinfo->timestamp ?></small></h2>                                      
+                  <div class="row clearfix">
+                    <div class="row clearfix">
+                      <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">
+                        <div class="form-group">
+                          <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?>
                         </div>
+                      </div>
+                      <div class="col-lg-8 col-md-10 col-sm-10 col-xs-9">
+                        <div class="form-group">
 
-                        <div class="body">
-                          <div class="row clearfix">
-                            <div class="row clearfix">
-                              <div class="col-lg-4 col-md-10 col-sm-10 col-xs-9">
-                                <div class="form-group">
-                                  <?= $this->tag->image(['uploads/News/' . $newsinfo->file, 'width' => '79%', 'heigth' => '60%']) ?>
-                                </div>
-                              </div>
-                              <div class="col-lg-8 col-md-10 col-sm-10 col-xs-9">
-                                <div class="form-group">
-
-                                  <div class="card">
-                                    <div class="header bg-red">
-                                      Category:<?= $newsinfo->categories->category_name ?>
-                                    </div>
-                                    <div class="body">
-                                      <?= $newsinfo->content ?>
-                                    </div>
-
-                                  </div><!--card-->
-
-                                </div>
-                              </div>
+                          <div class="card">
+                            <div class="header bg-red">
+                              Category:<?= $newsinfo->categories->category_name ?>
                             </div>
-                            <div class="row clearfix">
-                              <div class="col-lg-9 col-md-10 col-sm-10 col-xs-9">
-
-                              </div>
-                              <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
-                                <div class="form-group">
-                                  <!-- <button type="button" class="btn bg-red btn-block btn-lg waves-effect">PUBLISH</button> -->
-                                </div>
-                              </div>
+                            <div class="body">
+                              <?= $newsinfo->content ?>
                             </div>
-                          </div>
+
+                          </div><!--card-->
+
                         </div>
                       </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="row clearfix">
+                      <div class="col-lg-9 col-md-10 col-sm-10 col-xs-9">
+
+                      </div>
+                      <div class="col-lg-3 col-md-2 col-sm-2 col-xs-3">
+                        <div class="form-group">
+                          <!-- <button type="button" class="btn bg-red btn-block btn-lg waves-effect">PUBLISH</button> -->
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <?php } ?>
-            </div><!--card-->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
           </div>
-
-          <!-- ?//////////////////// -->
-
-
-
-          <!-- #END# Input -->
         </div>
-      </section>
+      </div>
+      <?php } ?>
+    </div><!--card-->
+  </div>
+
+  <!-- ?//////////////////// -->
+
+
+
+  <!-- #END# Input -->
+</div>
+</section>
 
 
 
 
-      <script type="text/javascript">
-      var save_method;
-      var table;
+<script type="text/javascript">
+var save_method;
+var table;
 
-      function add_announce()
-      {
-        save_method = 'add';
+function add_announce()
+{
+  save_method = 'add';
       $('#form')[0].reset(); // reset form on modals
       $('#modal_form').modal('show'); // show bootstrap modal
     //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title

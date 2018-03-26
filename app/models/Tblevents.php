@@ -4,7 +4,7 @@ namespace NewsApp\Models;
 
 use Phalcon\Mvc\Model;
 
-
+// date_default_timezone_set('Asia/Manila');
 class Tblevents extends Model
 {
 	public $event_id;
@@ -24,6 +24,15 @@ class Tblevents extends Model
 		);
 		
 	}
+	// public function beforeValidationOnSave()
+	// {
+		
+	// 	$today = time();
+	// 	$now =date("d-m-Y g:i:s ", $today);
+	// 	$this->timestamp = $now ;
+	// 	$this->timestamp = new \Phalcon\Db\RawValue­('FROM_UNIXTIME(1500­000000)'); 
+
+	// }
 
 }
 

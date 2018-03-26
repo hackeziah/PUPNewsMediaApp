@@ -38,48 +38,13 @@ class ManageNewsController extends ControllerBase
 
 
 
-		// $id = $this->session->get('authAdmin');
-		// $News_id = $id['id'];
-
-		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE News_id=:News_id:');
-		// $stmt = $query->execute([
-		// 	'News_id'=>$News_id,
-		// ]);
-
-		// // var_dump($query);
-		// $profile= Tblprofile::findFirst($News_id);
-
-
-		// $this->view->profile = $profile;
-
-		// $profileForm = new ProfileForm($profile);
-		// $this->view->profileForm = $profileForm;
-
-
-		// $id = $this->session->get('authAdmin');
-		// $News_id = $id['id'];
-
-		// $query = $this->modelsManager->createQuery('SELECT profile_id FROM NewsApp\Models\Tblprofile WHERE News_id=:News_id:');
-		// $stmt = $query->execute([
-		// 	'News_id'=>$News_id,
-		// ]);
-
-		// // var_dump($query);
-		// $profile= Tblprofile::findFirst($News_id);
-
-
-		// $this->view->profile = $profile;
-
-		// $profileForm = new ProfileForm($profile);
-		// $this->view->profileForm = $profileForm;
-
 
 	}
 
 
 	public function theNewssAction()
 	{
-		$news = News::find();
+		$news = Tblnews::find();
 		$currentPage = $this->request->getQuery('page', 'int') ?? 1;
 		$paginator = new Paginator([
 			'data' => $news,
@@ -94,113 +59,31 @@ class ManageNewsController extends ControllerBase
 
 	}
 
-	// public function createNewssAction()
-	// {
 
-	// 	if (!$this->request->isPost() && !$this->request->isAjax()) {
-	// 		return $this->response->redirect('admin/manageNewss');
-	// 	}
-
-	// 	$id = $this->session->get('authAdmin');
-	// 	$News_id = $id['id'];
-
-	// 	$profile= Tblprofile::findFirstByNews_id($News_id);
-		
-
-	// 	$this->view->profile = $profile;
-		
-
-	// 	$title = $this->request->getPost('title');
-	// 	$content = $this->request->getPost('content');
-	// 	$profile = $this->request->getPost('profile');
-
-
-
-	// 	$ins = new News();
-
-	// 	// $student->first = 80;
-	// 	$ins->profile_id 	= $profile;
-	// 	$ins->title	=  $title;
-	// 	$ins->content	=  $content;
-		
-
-
-
-	// 	if ($ins->save()) {
-	// 			// $this->session->set('message', 'New record has been added!');
-	// 		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-
-	// 	}
-
-	// 	else{
-	// 		echo json_encode(["status" => 'error','message' => 'Error Here']);
-	// 	}
-
-	// 	return false;
-
-	// }
 
 	
-	// public function detailAnnounceAction($id)
-	// {
-	// 	if (!$this->request->isPost() && !$this->request->isAjax()) {
-	// 		return $this->response->redirect('admin/manageNewss');
-	// 	}
+	public function shownewsAction($id)
+	{
+		if (!$this->request->isPost() && !$this->request->isAjax()) {
+			return $this->response->redirect('admin/managenews');
+		}
 
-	// 	$id = $this->filter->sanitize($id, 'int');
+		$id = $this->filter->sanitize($id, 'int');
 
-	// 	$new = News::findFirst($id);
-	// 	echo json_encode($news);
+		$news = Tblnews::findFirst($id);
+		echo json_encode($news);
 
-	// 	if (!$news) {
-	// 		// pag walang ganun
-	// 		$this->response->redirect('admin/manageNewss');
-	// 	}
+		if (!$news) {
+			// pag walang ganun
+			$this->response->redirect('admin/managenews');
+		}
 
-	// 	return false;
-
-
-	// }
-
-	// public function editannounceAction()
-	// {
-	// 	// check if post request if not redire
-	// 	if (!$this->request->isPost() && !$this->request->isAjax()) {
-	// 		return $this->response->redirect('admin/manageNewss');
-	// 	}
-	// 	$id = $this->request->getPost('id');
-		
-
-	// 	$ins = News::findFirst($id);
-
-	// 	if (!$ins) {
-	// 		// pag walang ganun ma record
-	// 		$this->response->redirect('admin/manageNewss');
-	// 	}
+		return false;
 
 
-	// 	$profile = $this->request->getPost('profile');
-	// 	$title = $this->request->getPost('title');
-	// 	$content = $this->request->getPost('content');
+	}
 
-
-	// 	$ins->profile_id 	= $profile;
-	// 	$ins->title	=  $title;
-	// 	$ins->content	=  $content;
-
-	// 	if ($ins->save()) {
-
-	// 		echo json_encode(["status" => 'ok','message' => 'Okay Here']);
-
-	// 	}
-
-	// 	else {
-	// 		echo json_encode(["status" => 'error','message' => 'Error Here']);
-	// 	}
-
-	// 	return false;
-	// }
-
+	
 	public function deletenewsAction($id)
 	{
 

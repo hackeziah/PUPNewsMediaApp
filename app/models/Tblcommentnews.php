@@ -2,7 +2,7 @@
 namespace NewsApp\Models;
 
 use Phalcon\Mvc\Model;
-
+// date_default_timezone_set('Asia/Manila');
 class Tblcommentnews extends Model
 {
 	public $commentnews_id;
@@ -29,6 +29,15 @@ class Tblcommentnews extends Model
 
 
 	}
+	// public function beforeValidationOnSave()
+	// {
+		
+	// 	$today = time();
+	// 	$now =date("d-m-Y g:i:s ", $today);
+	// 	$this->timestamp = $now ;
+	// 	$this->timestamp = new \Phalcon\Db\RawValue­('FROM_UNIXTIME(1500­000000)'); 
+
+	// }
 
 }
 
